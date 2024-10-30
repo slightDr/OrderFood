@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView android:id="@+id/main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:src="@drawable/login"
+            app:tint="@color/themeBlue"
+            android:layout_marginTop="45dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="订 餐 外 卖"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textColor="#000"
+            android:gravity="center_horizontal|center_vertical"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="中大食堂出品"
+            android:textSize="15sp"
+            android:textColor="#888"
+            android:gravity="center_horizontal|center_vertical"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="账号"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:gravity="center_vertical"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="20dp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入账号"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="密码"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入密码"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:inputType="textPassword"
+            />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            >
+
+            <RadioButton
+                android:id="@+id/login_shop"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="商家"
+                android:layout_weight="1"
+                />
+
+            <RadioButton
+                android:id="@+id/login_user"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="用户"
+                android:layout_weight="1"
+                />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/login_login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:text="登录"
+            android:textColor="#FFF"
+            android:background="@color/themeBlue"
+            android:foreground="?android:selectableItemBackground"
+            />
+
+        <Button
+            android:id="@+id/login_register_shop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:text="注册商家"
+            android:textColor="#FFF"
+            android:background="@color/themeBlue"
+            android:foreground="?android:selectableItemBackground"
+            />
+
+        <Button
+            android:id="@+id/login_register_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:text="注册用户"
+            android:textColor="#FFF"
+            android:background="@color/themeBlue"
+            android:foreground="?android:selectableItemBackground"
+            />
+
+    </LinearLayout>
+
+</ScrollView>
+
