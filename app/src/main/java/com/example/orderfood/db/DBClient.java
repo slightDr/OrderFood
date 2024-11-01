@@ -16,7 +16,7 @@ public class DBClient extends SQLiteOpenHelper {
     private static final String dbName = "db_orderfood.db";  // 数据库名称
     private Context context;
 
-    public SQLiteDatabase connection;  // 链接数据库的链接
+    public static SQLiteDatabase connection;  // 链接数据库的链接
 
     public DBClient(Context context) {
         super(context, dbName, null, ver, null);

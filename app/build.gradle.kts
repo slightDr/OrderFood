@@ -32,6 +32,8 @@ android {
 }
 
 dependencies {
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    androidTestImplementation("com.github.bumptech.glide:glide:4.12.0")
     implementation("com.qmuiteam:qmui:2.0.0-alpha10")
     implementation(libs.appcompat)
     implementation(libs.material)

@@ -9,6 +9,7 @@
     tools:context=".activity.user.RegisterUserActivity">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/register_shop_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="商家注册"
