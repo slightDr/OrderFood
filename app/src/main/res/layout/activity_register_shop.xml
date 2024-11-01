@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.user.RegisterUserActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="商家注册"
+        app:titleTextColor="@color/white"
+        android:background="@color/themeBlue"
+        app:navigationIcon="@drawable/back"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_gravity="center_horizontal|center_vertical">
+
+            <ImageView
+                android:id="@+id/register_s_img"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:src="@drawable/upload_img"
+                android:layout_marginTop="45dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="订 餐 外 卖"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:textColor="#000"
+                android:gravity="center_horizontal|center_vertical"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="中大食堂出品"
+                android:textSize="15sp"
+                android:textColor="#888"
+                android:gravity="center_horizontal|center_vertical"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="店铺名称"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:gravity="center_vertical"
+                android:layout_marginTop="50dp"
+                />
+
+            <EditText
+                android:id="@+id/register_s_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入店铺名称"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="密码"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                />
+
+            <EditText
+                android:id="@+id/register_s_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入密码"
+                android:inputType="textPassword"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="确认密码"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                />
+
+            <EditText
+                android:id="@+id/register_s_repwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请再次输入密码"
+                android:inputType="textPassword"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="店铺描述"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                />
+
+            <EditText
+                android:id="@+id/register_s_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入店铺描述"
+                android:inputType="textMultiLine"
+                android:minLines="5"
+                android:maxLines="5"
+                android:gravity="top"
+                android:scrollbars="vertical"
+                android:background="@android:drawable/edit_text"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="店铺类型"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                />
+
+            <EditText
+                android:id="@+id/register_s_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入店铺类型"
+                />
+
+            <Button
+                android:id="@+id/register_register_shop_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="注册商家"
+                android:textColor="#FFF"
+                android:background="@color/themeBlue"
+                android:foreground="?android:selectableItemBackground"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -13,7 +13,10 @@
         android:theme="@style/QMUI.Compat"
         tools:targetApi="31">
         <activity
-            android:name=".activity.RegisterActivity"
+            android:name=".activity.shop.RegisterShopActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.user.RegisterUserActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

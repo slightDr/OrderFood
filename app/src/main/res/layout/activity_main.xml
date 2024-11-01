@@ -11,7 +11,9 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
 
         <ImageView
             android:layout_width="match_parent"
@@ -49,15 +51,13 @@
             android:textColor="#000"
             android:gravity="center_vertical"
             android:layout_marginTop="50dp"
-            android:layout_marginLeft="20dp"
             />
 
         <EditText
+            android:id="@+id/login_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="请输入账号"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             />
 
         <TextView
@@ -69,15 +69,13 @@
             android:textColor="#000"
             android:gravity="center_vertical"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
             />
 
         <EditText
+            android:id="@+id/login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="请输入密码"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:inputType="textPassword"
             />
 
@@ -85,8 +83,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
             >
 
             <RadioButton
@@ -108,12 +104,10 @@
         </RadioGroup>
 
         <Button
-            android:id="@+id/login_login_button"
+            android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
             android:text="登录"
             android:textColor="#FFF"
             android:background="@color/themeBlue"
@@ -121,12 +115,10 @@
             />
 
         <Button
-            android:id="@+id/login_register_shop"
+            android:id="@+id/login_register_shop_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
             android:text="注册商家"
             android:textColor="#FFF"
             android:background="@color/themeBlue"
@@ -134,12 +126,10 @@
             />
 
         <Button
-            android:id="@+id/login_register_user"
+            android:id="@+id/login_register_user_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
             android:text="注册用户"
             android:textColor="#FFF"
             android:background="@color/themeBlue"

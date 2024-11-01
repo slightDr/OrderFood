@@ -1,7 +1,4 @@
-package com.example.orderfood.activity;
-/**
- * 注册界面活动
- */
+package com.example.orderfood.activity.shop;
 
 import android.os.Bundle;
 
@@ -13,17 +10,19 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.orderfood.R;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterShopActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register_shop);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // 实现返回功能
     }
 }
