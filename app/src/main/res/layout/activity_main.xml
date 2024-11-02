@@ -54,7 +54,7 @@
             />
 
         <EditText
-            android:id="@+id/login_account"
+            android:id="@+id/login_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="请输入账号"
@@ -86,7 +86,7 @@
             >
 
             <RadioButton
-                android:id="@+id/login_shop"
+                android:id="@+id/login_as_shop"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="商家"
@@ -94,7 +94,7 @@
                 />
 
             <RadioButton
-                android:id="@+id/login_user"
+                android:id="@+id/login_as_user"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="用户"

@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +14,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.orderfood.DAO.ShopDAO;
+import com.example.orderfood.DAO.UserDAO;
 import com.example.orderfood.activity.shop.RegisterShopActivity;
 import com.example.orderfood.activity.user.RegisterUserActivity;
 import com.example.orderfood.db.DBClient;
@@ -35,8 +39,44 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // 登陆界面单选默认选择商家
-        RadioButton shop_radio = findViewById(R.id.login_shop);
+        RadioButton shop_radio = findViewById(R.id.login_as_shop);
         shop_radio.setChecked(true);
+
+        // 登录功能
+        Button login = findViewById(R.id.login_button);
+        // 拿到账号、密码、登录选择
+        EditText loginNameText = findViewById(R.id.login_name);
+        EditText loginPwdText = findViewById(R.id.login_password);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String loginName = loginNameText.getText().toString();
+                String loginPwd = loginPwdText.getText().toString();
+                if (loginName.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "请输入账号", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (loginPwd.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                // 登录
+                if (shop_radio.isChecked()) { // 商家登录
+                    int result = ShopDAO.loginAsShop(loginName, loginPwd);
+                    if (result == 0) {
+                        Toast.makeText(MainActivity.this, "商家登录成功", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "商家账号或密码错误", Toast.LENGTH_SHORT).show();
+                    }
+                } else { // 用户登录
+                    int result = UserDAO.loginAsUser(loginName, loginPwd);
+                    if (result == 0) {
+                        Toast.makeText(MainActivity.this, "用户登录成功", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "用户账号或密码错误", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
 
         // 注册商家按钮
         Button register_shop = findViewById(R.id.login_register_shop_button);

@@ -4,26 +4,19 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
-
 import com.example.orderfood.db.DBClient;
 
 /**
- * 商家相关数据库操作
+ * 用户相关数据库操作
  */
-public class ShopDAO {
-
+public class UserDAO {
     public static SQLiteDatabase conn = DBClient.connection;
 
-    /**
-     * 保存商家
-     * @return 0为正确执行，1执行失败
-     */
-    public static int saveShop(String name, String pwd, String desc, String type, String img) {
+    public static int saveUser(String name, String pwd, String sex, String addr, String tel, String img) {
         try {
             conn.execSQL(
-                    "insert into shops values(?,?,?,?,?,?)",
-                    new Object[]{null, pwd, name, desc, type, img}
+                    "insert into users values(?,?,?,?,?,?,?)",
+                    new Object[]{null, pwd, name, sex, addr, tel, img}
             );
             return 0;
         } catch (Exception e) {
@@ -31,9 +24,9 @@ public class ShopDAO {
         }
     }
 
-    public static int loginAsShop(String name, String pwd) {
+    public static int loginAsUser(String name, String pwd) {
         String[] args = {name, pwd};
-        String sql = "select 1 from shops where s_name = ? and s_pwd = ? limit 1";
+        String sql = "select 1 from users where u_name = ? and u_pwd = ? limit 1";
 
         try (Cursor cursor = conn.rawQuery(sql, args)) {
             if (cursor.moveToFirst()) {
