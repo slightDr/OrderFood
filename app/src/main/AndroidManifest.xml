@@ -13,6 +13,9 @@
         android:theme="@style/Base.Theme.OrderFood"
         tools:targetApi="31">
         <activity
+            android:name=".activity.shop.ManageShopActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.shop.RegisterShopActivity"
             android:exported="false" />
         <activity

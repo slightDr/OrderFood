@@ -29,10 +29,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
     implementation("com.github.bumptech.glide:glide:4.12.0")
+    implementation(libs.legacy.support.v4)
+    implementation(libs.recyclerview)
     androidTestImplementation("com.github.bumptech.glide:glide:4.12.0")
     implementation("com.qmuiteam:qmui:2.0.0-alpha10")
     implementation(libs.appcompat)

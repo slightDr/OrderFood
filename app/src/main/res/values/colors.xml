@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="themeBlue">#1C87FF</color>
+    <color name="shop_bottom_back">#FEFEFE</color>
 </resources>

@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.orderfood.DAO.ShopDAO;
 import com.example.orderfood.DAO.UserDAO;
+import com.example.orderfood.activity.shop.ManageShopActivity;
 import com.example.orderfood.activity.shop.RegisterShopActivity;
 import com.example.orderfood.activity.user.RegisterUserActivity;
 import com.example.orderfood.db.DBClient;
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
                     int result = ShopDAO.loginAsShop(loginName, loginPwd);
                     if (result == 0) {
                         Toast.makeText(MainActivity.this, "商家登录成功", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, ManageShopActivity.class);
+                        startActivity(intent);
                     } else {
                         Toast.makeText(MainActivity.this, "商家账号或密码错误", Toast.LENGTH_SHORT).show();
                     }

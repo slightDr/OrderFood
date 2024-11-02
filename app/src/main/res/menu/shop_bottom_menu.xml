@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="首页"
+        app:showAsAction="always"
+        android:icon="@drawable/home"
+        />
+
+    <item
+        android:title="添加商品"
+        app:showAsAction="always"
+        android:icon="@drawable/add"
+        />
+
+    <item
+        android:title="商铺管理"
+        app:showAsAction="always"
+        android:icon="@drawable/info"
+        />
+
+</menu>
