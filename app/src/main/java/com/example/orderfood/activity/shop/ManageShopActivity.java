@@ -22,6 +22,7 @@ import com.example.orderfood.DAO.FoodDAO;
 import com.example.orderfood.R;
 import com.example.orderfood.activity.shop.fragment.ManageShopAddFragment;
 import com.example.orderfood.activity.shop.fragment.ManageShopHomeFragment;
+import com.example.orderfood.activity.shop.fragment.ManageShopMyFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -59,7 +60,7 @@ public class ManageShopActivity extends AppCompatActivity {
                 } else if (id == R.id.shop_bottom_navi_add) {
                     fragmentTransaction.replace(R.id.manage_shop_frame, new ManageShopAddFragment());
                 } else {
-                    fragmentTransaction.replace(R.id.manage_shop_frame, new ManageShopHomeFragment());
+                    fragmentTransaction.replace(R.id.manage_shop_frame, new ManageShopMyFragment());
                 }
                 fragmentTransaction.commit();
 

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".activity.shop.fragment.ManageShopMyFragment">
+
+    <!-- 店铺基本信息 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/themeBlue"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:padding="15dp">
+
+        <!-- 头像账号 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/upload_img"
+                android:background="@drawable/img_round"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="s_id"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center_vertical|center_horizontal"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
+
+        <!-- 店铺简介 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="2"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="30dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="s_name"
+                android:layout_marginTop="10dp"
+                android:textSize="20dp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="店铺简介：s_desc"
+                android:layout_marginTop="20dp"
+                android:textSize="13dp"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 基本操作 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="订单管理"
+            android:drawableTop="@drawable/order_manage"
+            android:background="?android:selectableItemBackground"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:drawablePadding="8dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="结束订单"
+            android:drawableTop="@drawable/order_success"
+            android:background="?android:selectableItemBackground"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:drawablePadding="8dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="评论管理"
+            android:drawableTop="@drawable/comments"
+            android:background="?android:selectableItemBackground"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:drawablePadding="8dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            />
+
+    </LinearLayout>
+
+    <!-- 详细操作 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="@color/white"
+            >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/slight_gray"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="修改店铺信息"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textSize="18sp"
+                android:clickable="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableLeft="@drawable/update_info"
+                android:drawableRight="@drawable/rightarrow"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/slight_gray"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="修改密码"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textSize="18sp"
+                android:clickable="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableLeft="@drawable/change_pwd"
+                android:drawableRight="@drawable/rightarrow"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/slight_gray"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="注销账号"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textSize="18sp"
+                android:clickable="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableLeft="@drawable/delete_account"
+                android:drawableRight="@drawable/rightarrow"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/slight_gray"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="退出账号"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textSize="18sp"
+                android:clickable="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableLeft="@drawable/logout"
+                android:drawableRight="@drawable/rightarrow"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/slight_gray"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>
