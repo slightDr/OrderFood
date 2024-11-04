@@ -1,6 +1,8 @@
 package com.example.orderfood;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         DBClient dbClient = new DBClient(this);
         dbClient.connection = dbClient.getWritableDatabase();
 
+        SharedPreferences sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -63,12 +68,14 @@ public class MainActivity extends AppCompatActivity {
                 // 登录
                 if (shop_radio.isChecked()) { // 商家登录
                     int result = ShopDAO.loginAsShop(loginName, loginPwd);
-                    if (result == 0) {
+                    if (result == -1) {
+                        Toast.makeText(MainActivity.this, "商家账号或密码错误", Toast.LENGTH_SHORT).show();
+                    } else {
                         Toast.makeText(MainActivity.this, "商家登录成功", Toast.LENGTH_SHORT).show();
+                        editor.putString("s_id", ""+result);
+                        editor.apply();
                         Intent intent = new Intent(MainActivity.this, ManageShopActivity.class);
                         startActivity(intent);
-                    } else {
-                        Toast.makeText(MainActivity.this, "商家账号或密码错误", Toast.LENGTH_SHORT).show();
                     }
                 } else { // 用户登录
                     int result = UserDAO.loginAsUser(loginName, loginPwd);

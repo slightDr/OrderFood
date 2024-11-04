@@ -96,8 +96,14 @@ public class FoodDAO {
         return ret;
     }
 
-    public void addFood(FoodBean food) {
-
+    public static int addFood(String s_id, String name, String price, String desc, String img) {
+        String data[] = {null, s_id, name, desc, price, img};
+        try {
+            conn.execSQL("insert into foods values(?,?,?,?,?,?);", data);
+            return 0;
+        } catch (Exception e) {
+            return 1;
+        }
     }
 
     public void deleteFood(int f_id) {

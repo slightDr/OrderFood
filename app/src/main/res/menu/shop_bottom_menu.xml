@@ -4,18 +4,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/shop_bottom_navi_home"
         android:title="首页"
         app:showAsAction="always"
         android:icon="@drawable/home"
         />
 
     <item
+        android:id="@+id/shop_bottom_navi_add"
         android:title="添加商品"
         app:showAsAction="always"
         android:icon="@drawable/add"
         />
 
     <item
+        android:id="@+id/shop_bottom_navi_my"
         android:title="商铺管理"
         app:showAsAction="always"
         android:icon="@drawable/info"

@@ -113,7 +113,7 @@ public class RegisterShopActivity extends AppCompatActivity {
                 String sType = sTypeText.getText().toString();
 
                 // 判断图片文件格式
-                if (!(sImg instanceof  BitmapDrawable)) {
+                if (!(sImg instanceof BitmapDrawable)) {
                     Toast.makeText(RegisterShopActivity.this, "图片格式错误", Toast.LENGTH_SHORT).show();
                     return;
                 }

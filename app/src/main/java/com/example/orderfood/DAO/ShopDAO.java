@@ -37,11 +37,12 @@ public class ShopDAO {
 
         try (Cursor cursor = conn.rawQuery(sql, args)) {
             if (cursor.moveToFirst()) {
-                return 0; // 登录成功
+                Log.d("mine", "login shop id: "+cursor.getInt(0));
+                return cursor.getInt(0); // 登录成功
             }
         } catch (Exception e) {
             Log.e("mine", e.toString());
         }
-        return 1; // 登录失败
+        return -1; // 登录失败
     }
 }
