@@ -37,25 +37,25 @@ public class FoodDAO {
     }
 
     /**
-     * 用id获取指定食物
-     * @param id
-     * @return
+     * 用shop id和food name获取指定食物
      */
-    public static FoodBean getFoodByFid(String id) {
-        Cursor cursor = conn.rawQuery("select * from foods where f_id = ?",
-                new String[]{id});
-        if (cursor.moveToFirst()) {
+    public static List<FoodBean> getFoodBySidName(String id, String name) {
+        List<FoodBean> ret = new ArrayList<>();
+        Cursor cursor = conn.rawQuery("select * from foods where s_id=? and f_name like ?",
+                new String[]{id, "%"+name+"%"});
+        while (cursor.moveToNext()) {
             Integer f_id = cursor.getInt(0);
             Integer s_id = cursor.getInt(1);
             String f_name = cursor.getString(2);
             String f_desc = cursor.getString(3);
             float f_price = cursor.getFloat(4);
             String f_img = cursor.getString(5);
-            return new FoodBean(
+            FoodBean foodBean = new FoodBean(
                     f_id, s_id, f_name, f_desc, f_price, f_img
             );
+            ret.add(foodBean);
         }
-        return null;
+        return ret;
     }
 
     /**

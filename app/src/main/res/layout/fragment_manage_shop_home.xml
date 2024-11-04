@@ -12,6 +12,7 @@
         android:background="@color/themeBlue">
 
         <androidx.appcompat.widget.SearchView
+            android:id="@+id/manage_shop_home_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:iconifiedByDefault="false"
