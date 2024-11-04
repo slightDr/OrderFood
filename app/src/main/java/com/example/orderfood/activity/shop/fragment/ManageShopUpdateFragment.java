@@ -1,6 +1,7 @@
 package com.example.orderfood.activity.shop.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +10,9 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,6 +23,9 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -30,10 +37,19 @@ import com.example.orderfood.DAO.FoodDAO;
 import com.example.orderfood.R;
 import com.example.orderfood.util.FileImgUtil;
 
+import java.util.zip.Inflater;
+
 public class ManageShopUpdateFragment extends Fragment {
     View rootView;
     private ActivityResultLauncher<String> getContentLauncher;
     Uri selectPicUri = null;
+    String f_id;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     /**
      * 打开文件选择器
@@ -72,6 +88,7 @@ public class ManageShopUpdateFragment extends Fragment {
         // 获取当前商品信息
         Bundle bundle = getArguments();
         String f_id = bundle.getString("f_id");
+        this.f_id = f_id;
         String f_img = bundle.getString("f_img");
         String f_name = bundle.getString("f_name");
         String f_price = bundle.getString("f_price");
@@ -147,5 +164,45 @@ public class ManageShopUpdateFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.manage_shop_del_food, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.manage_shop_del_food_icon) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+            builder.setTitle("删除商品");
+            builder.setMessage("您确定删除该商品吗?");
+            builder.setCancelable(false);
+            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    int res = FoodDAO.delFood(f_id);
+                    if (res == 0) {
+                        Toast.makeText(getActivity(), "删除商品成功", Toast.LENGTH_SHORT).show();
+                        handleBackPress();
+                    } else {
+                        Toast.makeText(getActivity(), "删除商品失败", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            builder.show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

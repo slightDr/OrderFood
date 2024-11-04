@@ -1,13 +1,16 @@
 package com.example.orderfood.activity.shop;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -15,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.orderfood.DAO.FoodDAO;
 import com.example.orderfood.R;
 import com.example.orderfood.activity.shop.fragment.ManageShopAddFragment;
 import com.example.orderfood.activity.shop.fragment.ManageShopHomeFragment;
@@ -63,12 +67,4 @@ public class ManageShopActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-
-
-
-
-
 }

@@ -115,4 +115,18 @@ public class FoodDAO {
             return 1;
         }
     }
+
+    /**
+     * 删除商品
+     * @param f_id
+     * @return
+     */
+    public static int delFood(String f_id) {
+        try {
+            conn.execSQL("delete from foods where f_id=?;", new String[]{f_id});
+            return 0;
+        } catch (Exception e) {
+            return 1;
+        }
+    }
 }
