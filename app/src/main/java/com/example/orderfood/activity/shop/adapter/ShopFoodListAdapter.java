@@ -1,7 +1,6 @@
 package com.example.orderfood.activity.shop.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -20,8 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.orderfood.Bean.FoodBean;
 import com.example.orderfood.DAO.FoodDAO;
 import com.example.orderfood.R;
-import com.example.orderfood.activity.shop.fragment.ManageShopHomeFragment;
-import com.example.orderfood.activity.shop.fragment.ManageShopUpdateFragment;
+import com.example.orderfood.activity.shop.fragment.ManageShopUpdateFoodFragment;
 
 import java.util.List;
 
@@ -72,7 +70,7 @@ public class ShopFoodListAdapter extends ArrayAdapter<FoodBean> {
                 bundle.putString("f_desc", food.getF_desc());
 
                 // 创建新的 Fragment 并设置 Bundle
-                ManageShopUpdateFragment fragment = new ManageShopUpdateFragment();
+                ManageShopUpdateFoodFragment fragment = new ManageShopUpdateFoodFragment();
                 fragment.setArguments(bundle);
 
                 FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();

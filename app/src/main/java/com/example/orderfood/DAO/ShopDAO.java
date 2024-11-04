@@ -60,4 +60,23 @@ public class ShopDAO {
         }
         return null;
     }
+
+    public static int delShopBySid(String s_id) {
+        try {
+            conn.execSQL("delete from shops where s_id=?", new String[]{s_id});
+            return 0;
+        } catch (Exception e) {
+            return 1;
+        }
+    }
+
+    public static int updateShop(String s_id, String name, String desc, String type, String img) {
+        String data[] = new String[]{name, desc, type, img, s_id};
+        try {
+            conn.execSQL("update shops set s_name=?,s_desc=?,s_type=?,s_img=? where s_id=?", data);
+            return 0;
+        } catch (Exception e) {
+            return 1;
+        }
+    }
 }

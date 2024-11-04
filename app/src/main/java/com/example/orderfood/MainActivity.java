@@ -76,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
                         editor.apply();
                         Intent intent = new Intent(MainActivity.this, ManageShopActivity.class);
                         startActivity(intent);
+//                        loginNameText.setText(""); // 清空输入栏
+                        loginPwdText.setText("");
                     }
                 } else { // 用户登录
                     int result = UserDAO.loginAsUser(loginName, loginPwd);

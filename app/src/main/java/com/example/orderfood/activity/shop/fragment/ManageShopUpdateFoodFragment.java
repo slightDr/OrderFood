@@ -1,9 +1,6 @@
 package com.example.orderfood.activity.shop.fragment;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -23,12 +20,10 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -37,9 +32,7 @@ import com.example.orderfood.DAO.FoodDAO;
 import com.example.orderfood.R;
 import com.example.orderfood.util.FileImgUtil;
 
-import java.util.zip.Inflater;
-
-public class ManageShopUpdateFragment extends Fragment {
+public class ManageShopUpdateFoodFragment extends Fragment {
     View rootView;
     private ActivityResultLauncher<String> getContentLauncher;
     Uri selectPicUri = null;

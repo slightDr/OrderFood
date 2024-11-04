@@ -1,6 +1,7 @@
 package com.example.orderfood.activity.shop;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -39,15 +40,24 @@ public class ManageShopActivity extends AppCompatActivity {
             return insets;
         });
 
-        // 界面打开时，打开主界面
+        Intent intent = getIntent();
+        String state = intent.getStringExtra("state");
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.manage_shop_frame, new ManageShopHomeFragment());
-        fragmentTransaction.commit();
+        BottomNavigationView naviView = findViewById(R.id.shop_bottom_navi); // 底部导航栏
+
+        // 界面打开时，根据state打开界面
+        if (state == null || state.isEmpty()) {
+            fragmentTransaction.replace(R.id.manage_shop_frame, new ManageShopHomeFragment());
+            fragmentTransaction.commit();
+        } else {
+            fragmentTransaction.replace(R.id.manage_shop_frame, new ManageShopMyFragment());
+            naviView.setSelectedItemId(R.id.shop_bottom_navi_my);
+            fragmentTransaction.commit();
+        }
 
         // 点击底部导航栏
-        BottomNavigationView view = findViewById(R.id.shop_bottom_navi);
-        view.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+        naviView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 FragmentManager fragmentManager = getSupportFragmentManager();
