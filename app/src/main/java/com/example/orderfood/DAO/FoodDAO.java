@@ -106,12 +106,13 @@ public class FoodDAO {
         }
     }
 
-    public void deleteFood(int f_id) {
-
+    public static int updateFood(String f_id, String name, String price, String desc, String img) {
+        String data[] = {name, desc, price, img, f_id};
+        try {
+            conn.execSQL("update foods set f_name=?, f_desc=?, f_price=?, f_img=? where f_id=?;", data);
+            return 0;
+        } catch (Exception e) {
+            return 1;
+        }
     }
-
-    public void updataFood(FoodBean food) {
-
-    }
-
 }

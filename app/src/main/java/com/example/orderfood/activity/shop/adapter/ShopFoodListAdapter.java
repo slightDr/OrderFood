@@ -1,8 +1,10 @@
 package com.example.orderfood.activity.shop.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +13,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.orderfood.Bean.FoodBean;
 import com.example.orderfood.DAO.FoodDAO;
 import com.example.orderfood.R;
+import com.example.orderfood.activity.shop.fragment.ManageShopHomeFragment;
+import com.example.orderfood.activity.shop.fragment.ManageShopUpdateFragment;
 
 import java.util.List;
 
@@ -52,6 +59,28 @@ public class ShopFoodListAdapter extends ArrayAdapter<FoodBean> {
         saleText.setText("月销售：" + FoodDAO.getMonthSale(food.getF_id()));
         priceText.setText("价格：" + food.getF_price());
         descText.setText(food.getF_desc());
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 创建 Bundle 来封装数据
+                Bundle bundle = new Bundle();
+                bundle.putString("f_id", ""+food.getF_id());
+                bundle.putString("f_img", food.getF_img());
+                bundle.putString("f_name", food.getF_name());
+                bundle.putString("f_price", ""+food.getF_price());
+                bundle.putString("f_desc", food.getF_desc());
+
+                // 创建新的 Fragment 并设置 Bundle
+                ManageShopUpdateFragment fragment = new ManageShopUpdateFragment();
+                fragment.setArguments(bundle);
+
+                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.manage_shop_frame, fragment);
+                fragmentTransaction.commit();
+            }
+        });
 
         return convertView;
     }
