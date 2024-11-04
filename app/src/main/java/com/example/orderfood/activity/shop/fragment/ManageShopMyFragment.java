@@ -29,6 +29,7 @@ import com.example.orderfood.DAO.FoodDAO;
 import com.example.orderfood.DAO.ShopDAO;
 import com.example.orderfood.R;
 import com.example.orderfood.activity.shop.ManageShopUpdateInfoActivity;
+import com.example.orderfood.activity.shop.ManageShopUpdatePwdActivity;
 
 public class ManageShopMyFragment extends Fragment {
 
@@ -118,7 +119,8 @@ public class ManageShopMyFragment extends Fragment {
         changePwdText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), ManageShopUpdatePwdActivity.class);
+                startActivity(intent);
             }
         });
 

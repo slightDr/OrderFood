@@ -79,4 +79,14 @@ public class ShopDAO {
             return 1;
         }
     }
+
+    public static int updateShopPwd(String s_id, String pwd) {
+        String data[] = new String[]{pwd, s_id};
+        try {
+            conn.execSQL("update shops set s_pwd=? where s_id=?", data);
+            return 0;
+        } catch (Exception e) {
+            return 1;
+        }
+    }
 }
