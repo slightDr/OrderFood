@@ -4,8 +4,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
-
+import com.example.orderfood.Bean.ShopBean;
 import com.example.orderfood.db.DBClient;
 
 /**
@@ -44,5 +43,21 @@ public class ShopDAO {
             Log.e("mine", e.toString());
         }
         return -1; // 登录失败
+    }
+
+    public static ShopBean getShopInfoBySid(String s_id) {
+        String data[] = {s_id};
+        Cursor cursor = conn.rawQuery("select * from shops where s_id=?", data);
+        if (cursor.moveToFirst()) {
+            return new ShopBean(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getString(5)
+            );
+        }
+        return null;
     }
 }
