@@ -2,9 +2,11 @@ package com.example.orderfood.DAO;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.orderfood.Bean.OrderBean;
 import com.example.orderfood.Bean.OrderDetailBean;
+import com.example.orderfood.Bean.UserBean;
 import com.example.orderfood.db.DBClient;
 
 import java.util.ArrayList;
@@ -38,7 +40,8 @@ public class OrderDAO {
      */
     public static List<OrderBean> getAllOrdersBySidStatus(String s_id, String status) {
         List<OrderBean> ret = new ArrayList<>();
-        Cursor cursor = conn.rawQuery("select * from orders where s_id=? and o_status=?",
+        Cursor cursor = conn.rawQuery("select * from orders where s_id=? and o_status=? " +
+                        "order by strftime('%Y-%m-%d %H:%M:%S', o_time) desc",
                 new String[]{s_id, status});
         while (cursor.moveToNext()) {
             ret.add(new OrderBean(
@@ -86,5 +89,27 @@ public class OrderDAO {
         } catch (Exception e) {
             return 1;
         }
+    }
+
+    /**
+     * 在订单中列表中通过用户联系方式或订单号查询指定订单
+     */
+    public static List<OrderBean> getFromOrdersByStr(List<OrderBean> orderBeans, String str) {
+        List<OrderBean> ret = new ArrayList<>();
+        // Log.d("mine", "getFromOrdersByStr");
+        for (OrderBean orderBean : orderBeans) {
+            if ((""+orderBean.getO_id()).contains(str)) {
+                // Log.d("mine", "id, "+orderBean.toString());
+                ret.add(orderBean);
+                continue;
+            }
+            int u_id = orderBean.getU_id();
+            UserBean userBean = UserDAO.getUserInfoByUid("" + u_id);
+            if (userBean.getU_tel().contains(str)) {
+                // Log.d("mine", "tel, "+orderBean.toString());
+                ret.add(orderBean);
+            }
+        }
+        return ret;
     }
 }

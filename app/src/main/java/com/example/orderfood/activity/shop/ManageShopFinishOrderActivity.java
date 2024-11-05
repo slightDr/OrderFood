@@ -3,9 +3,10 @@ package com.example.orderfood.activity.shop;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.SearchView;
+import androidx.appcompat.widget.SearchView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,31 +61,31 @@ public class ManageShopFinishOrderActivity extends AppCompatActivity {
         }
 
         // 搜索订单功能
-//        SearchView searchView = findViewById(R.id.manage_shop_finish_order_search);
-//        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) { // 根据name查找
-//                String s_id = sharedPreferences.getString("s_id", "");
-//                List<FoodBean> foodBeanList = FoodDAO.getFoodBySidName(s_id, s);
-//                if (foodBeanList.isEmpty()) {
-//                    listView.setAdapter(null);
-//                } else {
-//                    listView.setAdapter(new ShopFoodListAdapter(ManageShopFinishOrderActivity.this, foodBeanList));
-//                }
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String s) {
-//                String s_id = sharedPreferences.getString("s_id", "");
-//                List<FoodBean> foodBeanList = FoodDAO.getFoodBySidName(s_id, s);
-//                if (foodBeanList.isEmpty()) {
-//                    listView.setAdapter(null);
-//                } else {
-//                    listView.setAdapter(new ShopFoodListAdapter(ManageShopFinishOrderActivity.this, foodBeanList));
-//                }
-//                return true;
-//            }
-//        });
+        SearchView searchView = findViewById(R.id.manage_shop_finish_order_search);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                List<OrderBean> orders = OrderDAO.getFromOrdersByStr(allOrders, s);
+                // Log.d("mine", ""+orders.size());
+                if (orders.isEmpty()) {
+                    listView.setAdapter(null);
+                } else {
+                    listView.setAdapter(new UnfinishOrderListAdapter(ManageShopFinishOrderActivity.this, orders));
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                List<OrderBean> orders = OrderDAO.getFromOrdersByStr(allOrders, s);
+                // Log.d("mine", ""+orders.size());
+                if (orders.isEmpty()) {
+                    listView.setAdapter(null);
+                } else {
+                    listView.setAdapter(new UnfinishOrderListAdapter(ManageShopFinishOrderActivity.this, orders));
+                }
+                return true;
+            }
+        });
     }
 }
