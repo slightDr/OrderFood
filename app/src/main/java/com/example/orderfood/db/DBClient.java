@@ -15,7 +15,7 @@ import com.example.orderfood.util.FileImgUtil;
  */
 public class DBClient extends SQLiteOpenHelper {
 
-    private static final int ver = 10;  // 版本号，每次更改表结构都需要+1，否则不生效
+    private static final int ver = 18;  // 版本号，每次更改表结构都需要+1，否则不生效
     private static final String dbName = "db_orderfood.db";  // 数据库名称
     private Context context;
 
@@ -57,8 +57,10 @@ public class DBClient extends SQLiteOpenHelper {
                 "u_tel varchar(20)," +
                 "u_img varchar(255))"); // 图片路径
         // 初始用户
+        String userPath = FileImgUtil.getPicAbsPath();
+        FileImgUtil.saveDefaultImgToPath(context, R.drawable.upload_img, userPath);
         sqLiteDatabase.execSQL("insert into users values(?,?,?,?,?,?,?)",
-                new Object[]{null, "123456", "u_test", "男", "test address", "test tel", ""});
+                new Object[]{null, "123456", "u_test", "男", "test address", "test tel", userPath});
 
         /** 存储商品 */
         sqLiteDatabase.execSQL("drop table if exists foods"); //如果这表存在则删
@@ -79,42 +81,43 @@ public class DBClient extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("insert into foods values(?,?,?,?,?,?)",
                 new Object[]{null, 1, "f_test2", "f_test2", 0.02, foodPath2});
 
-        /** 订单详情表 */
-        sqLiteDatabase.execSQL("drop table if exists order_details"); //如果这表存在则删
-        sqLiteDatabase.execSQL("create table order_details(" +
-                "o_detail_id integer primary key autoincrement," + // 订单详情id
-                "f_name varchar(20)," +
-                "f_desc varchar(200)," +
-                "f_price float," +
-                "f_img varchar(255)," + // 图片路径
-                "o_num integer)"); // 数量
-        // 初始订单详情
-        sqLiteDatabase.execSQL("insert into order_details values(?,?,?,?,?,?)",
-                new Object[]{null, "f_test2", "f_test2", .02, foodPath2, 111});
-        sqLiteDatabase.execSQL("insert into order_details values(?,?,?,?,?,?)",
-                new Object[]{null, "f_test1", "f_test1", .01, foodPath1, 22});
-        sqLiteDatabase.execSQL("insert into order_details values(?,?,?,?,?,?)",
-                new Object[]{null, "f_test1", "f_test1", .01, foodPath1, 333});
-
-
         /** 订单表 */
         sqLiteDatabase.execSQL("drop table if exists orders"); //如果这表存在则删
         sqLiteDatabase.execSQL("create table orders(" +
                 "o_id integer primary key autoincrement," + // 订单id
                 "o_time varchar(50)," + // 订单时间
                 "s_id integer references shops(s_id)," +
-                "f_id integer references foods(f_id)," +
                 "u_id integer references users(u_id)," +
-                "o_detail_id integer references order_details(o_detail_id)," + // 商详id
                 "o_status integer," + // 订单状态: 1未处理订单 2取消订单 3完成订单
                 "o_addr varchar(255))"); // 收货地址
         // 初始订单
-        sqLiteDatabase.execSQL("insert into orders values(?,?,?,?,?,?,?,?)",
-                new Object[]{null, "2024-11-01 12:34:56", 1, 2, 1, 1, 3, "test addr"});
-        sqLiteDatabase.execSQL("insert into orders values(?,?,?,?,?,?,?,?)",
-                new Object[]{null, "2024-11-02 12:34:56", 1, 1, 1, 2, 1, "test addr"});
-        sqLiteDatabase.execSQL("insert into orders values(?,?,?,?,?,?,?,?)",
-                new Object[]{null, "2024-11-03 12:34:56", 1, 1, 1, 3, 2, "test addr"});
+        sqLiteDatabase.execSQL("insert into orders values(?,?,?,?,?,?)",
+                new Object[]{null, "2024-11-01 12:34:56", 1, 1, 3, "test addr"});
+        sqLiteDatabase.execSQL("insert into orders values(?,?,?,?,?,?)",
+                new Object[]{null, "2024-11-02 12:34:56", 1, 1, 1, "test addr"});
+        sqLiteDatabase.execSQL("insert into orders values(?,?,?,?,?,?)",
+                new Object[]{null, "2024-11-03 12:34:56", 1, 1, 2, "test addr"});
+
+        /** 订单详情表 */
+        sqLiteDatabase.execSQL("drop table if exists order_details"); //如果这表存在则删
+        sqLiteDatabase.execSQL("create table order_details(" +
+                "o_detail_id integer primary key autoincrement," + // 订单详情id
+                "o_id integer references orders(o_id)," + // 订单id
+                "f_id integer references foods(f_id)," +
+                "f_name varchar(20)," +
+                "f_desc varchar(200)," +
+                "f_price float," +
+                "f_img varchar(255)," + // 图片路径
+                "o_num integer)"); // 数量
+        // 初始订单详情
+        sqLiteDatabase.execSQL("insert into order_details values(?,?,?,?,?,?,?,?)",
+                new Object[]{null, 2, 2, "f_test2", "f_test2", .02, foodPath2, 1});
+        sqLiteDatabase.execSQL("insert into order_details values(?,?,?,?,?,?,?,?)",
+                new Object[]{null, 1, 1, "f_test1", "f_test1", .01, foodPath1, 22});
+        sqLiteDatabase.execSQL("insert into order_details values(?,?,?,?,?,?,?,?)",
+                new Object[]{null, 2, 2, "f_test2", "f_test2", .02, foodPath2, 22});
+        sqLiteDatabase.execSQL("insert into order_details values(?,?,?,?,?,?,?,?)",
+                new Object[]{null, 3, 1, "f_test1", "f_test1", .01, foodPath1, 333});
 
         sqLiteDatabase.execSQL("PRAGMA foreign_keys = true");
     }

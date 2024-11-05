@@ -4,6 +4,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.orderfood.Bean.ShopBean;
+import com.example.orderfood.Bean.UserBean;
 import com.example.orderfood.db.DBClient;
 
 /**
@@ -36,5 +38,25 @@ public class UserDAO {
             Log.e("mine", e.toString());
         }
         return 1; // 登录失败
+    }
+
+    /**
+     * 查询用户信息
+     */
+    public static UserBean getUserInfoByUid(String u_id) {
+        String data[] = {u_id};
+        Cursor cursor = conn.rawQuery("select * from users where u_id=?", data);
+        if (cursor.moveToFirst()) {
+            return new UserBean(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getString(5),
+                    cursor.getString(6)
+            );
+        }
+        return null;
     }
 }

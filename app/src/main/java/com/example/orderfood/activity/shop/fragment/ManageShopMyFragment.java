@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import com.example.orderfood.Bean.ShopBean;
 import com.example.orderfood.DAO.FoodDAO;
 import com.example.orderfood.DAO.ShopDAO;
 import com.example.orderfood.R;
+import com.example.orderfood.activity.shop.ManageShopFinishOrderActivity;
 import com.example.orderfood.activity.shop.ManageShopUpdateInfoActivity;
 import com.example.orderfood.activity.shop.ManageShopUpdatePwdActivity;
 
@@ -120,6 +122,16 @@ public class ManageShopMyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ManageShopUpdatePwdActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        /** 订单管理 */
+        Button manageOrderButton = rootView.findViewById(R.id.manage_shop_my_manage_order);
+        manageOrderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ManageShopFinishOrderActivity.class);
                 startActivity(intent);
             }
         });

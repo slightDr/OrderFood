@@ -62,16 +62,16 @@ public class FoodDAO {
      * 用fid获取月详情单
      * @return
      */
-    public static List<Integer> getMonthOrderDetailIds(int f_id) {
+    public static List<String> getMonthOrderIds(String s_id) {
         Cursor cursor = conn.rawQuery("select * from orders " +
-                "where strftime('%Y-%m', o_time) = strftime('%Y-%m', 'now') and f_id = ?;",
-                new String[]{""+f_id});
-        List<Integer> o_detail_ids = new ArrayList<>();
+                "where strftime('%Y-%m', o_time) = strftime('%Y-%m', 'now') and s_id=? and o_status=3;",
+                new String[]{s_id});
+        List<String> o_ids = new ArrayList<>();
         while (cursor.moveToNext()) {
-            int idx = cursor.getColumnIndex("o_detail_id");
-            o_detail_ids.add(cursor.getInt(idx));
+            int idx = cursor.getColumnIndex("o_id");
+            o_ids.add(""+cursor.getInt(idx));
         }
-        return o_detail_ids;
+        return o_ids;
     }
 
     /**
@@ -79,15 +79,15 @@ public class FoodDAO {
      * @param f_id
      * @return
      */
-    public static int getMonthSale(int f_id) {
+    public static int getMonthSale(String f_id, String s_id) {
         Integer ret = 0;
         // fid相等的当月的订单详情ids
-        List<Integer> o_detail_ids = getMonthOrderDetailIds(f_id);
+        List<String> o_ids = getMonthOrderIds(s_id);
         Log.d("mine", "f_id: "+f_id);
-        for (Integer id : o_detail_ids) {
-            Log.d("mine", ""+id);
+        for (String id : o_ids) {
+            Log.d("mine", id);
             Cursor cursor = conn.rawQuery("select * from order_details " +
-                    "where o_detail_id = ?", new String[]{""+id});
+                    "where o_id=? and f_id=?", new String[]{id, f_id});
             while (cursor.moveToNext()) { // 遍历，总数求和
                 int idx = cursor.getColumnIndex("o_num");
                 ret += cursor.getInt(idx);

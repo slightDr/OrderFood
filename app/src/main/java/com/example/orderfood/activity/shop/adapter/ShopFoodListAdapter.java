@@ -1,6 +1,7 @@
 package com.example.orderfood.activity.shop.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -43,6 +44,8 @@ public class ShopFoodListAdapter extends ArrayAdapter<FoodBean> {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.list_shop_home_food, viewGroup, false);
         }
+        SharedPreferences sharedPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE);
+        String s_id = sharedPreferences.getString("s_id", "");
         FoodBean food = list.get(position);
 
         ImageView imageView = convertView.findViewById(R.id.shop_food_list_foodImg);
@@ -54,7 +57,7 @@ public class ShopFoodListAdapter extends ArrayAdapter<FoodBean> {
         Bitmap bitmap = BitmapFactory.decodeFile(food.getF_img());
         imageView.setImageBitmap(bitmap);
         nameText.setText(food.getF_name());
-        saleText.setText("月销售：" + FoodDAO.getMonthSale(food.getF_id()));
+        saleText.setText("月销售：" + FoodDAO.getMonthSale(""+food.getF_id(), s_id));
         priceText.setText("价格：" + food.getF_price());
         descText.setText(food.getF_desc());
 

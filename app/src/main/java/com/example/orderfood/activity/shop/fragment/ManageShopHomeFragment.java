@@ -48,6 +48,7 @@ public class ManageShopHomeFragment extends Fragment {
             listView.setAdapter(new ShopFoodListAdapter(getContext(), allFood));
         }
 
+        // 搜索商品
         SearchView searchView = rootView.findViewById(R.id.manage_shop_home_search);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
