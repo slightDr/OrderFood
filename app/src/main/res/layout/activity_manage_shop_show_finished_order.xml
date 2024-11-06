@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.shop.ManageShopShowFinishedOrderActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/manage_shop_finished_order_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigationIcon="@drawable/back"
+        android:background="@color/themeBlue">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/manage_shop_finished_order_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:iconifiedByDefault="false"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/search_editor"
+            app:queryHint="请输入订单号或用户联系方式"
+            />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ListView
+        android:id="@+id/manage_shop_finished_order_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="10dp"
+        android:layout_gravity="center"
+        android:divider="@android:color/transparent"
+        android:layout_marginTop="10dp"
+        />
+
+</LinearLayout>

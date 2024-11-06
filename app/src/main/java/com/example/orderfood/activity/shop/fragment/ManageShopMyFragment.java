@@ -31,6 +31,7 @@ import com.example.orderfood.DAO.ShopDAO;
 import com.example.orderfood.R;
 import com.example.orderfood.activity.shop.ManageShopFinishOrderActivity;
 import com.example.orderfood.activity.shop.ManageShopManageCommentActivity;
+import com.example.orderfood.activity.shop.ManageShopShowFinishedOrderActivity;
 import com.example.orderfood.activity.shop.ManageShopUpdateInfoActivity;
 import com.example.orderfood.activity.shop.ManageShopUpdatePwdActivity;
 
@@ -133,6 +134,16 @@ public class ManageShopMyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ManageShopFinishOrderActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        /** 完成订单 */
+        Button finishedOrderButton = rootView.findViewById(R.id.manage_shop_my_manage_finished_order);
+        finishedOrderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ManageShopShowFinishedOrderActivity.class);
                 startActivity(intent);
             }
         });

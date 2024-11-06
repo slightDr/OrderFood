@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/unfinish_order_user_img"
+            android:id="@+id/finished_order_user_img"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/upload_img"
@@ -22,7 +22,7 @@
             android:layout_marginLeft="10dp"/>
 
         <TextView
-            android:id="@+id/unfinish_order_id"
+            android:id="@+id/finished_order_id"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:text="test user"
@@ -32,7 +32,7 @@
             android:gravity="center_vertical|center_horizontal"/>
 
         <TextView
-            android:id="@+id/unfinish_order_time"
+            android:id="@+id/finished_order_time"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:text="下单时间：xxxx-xx-xx xx:xx:xx"
@@ -57,7 +57,7 @@
             />
 
         <TextView
-            android:id="@+id/unfinish_order_user_name"
+            android:id="@+id/finished_order_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="user name"
@@ -80,7 +80,7 @@
             />
 
         <TextView
-            android:id="@+id/unfinish_order_user_addr"
+            android:id="@+id/finished_order_user_addr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="user addr"
@@ -103,7 +103,7 @@
             />
 
         <TextView
-            android:id="@+id/unfinish_order_user_tel"
+            android:id="@+id/finished_order_user_tel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="user tel"
@@ -133,12 +133,12 @@
         android:background="@color/slight_gray"/>
 
 <!--    <ListView-->
-<!--        android:id="@+id/unfinish_order_detail_list"-->
+<!--        android:id="@+id/finished_order_detail_list"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="65dp"/>-->
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/unfinish_order_detail_list"
+        android:id="@+id/finished_order_detail_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
@@ -153,9 +153,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp">
 
         <TextView
+            android:id="@+id/finished_order_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="订单待处理"
@@ -174,45 +176,13 @@
             android:gravity="right|center_vertical"/>
 
         <TextView
-            android:id="@+id/unfinish_order_list_totprice"
+            android:id="@+id/finished_order_list_totprice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="￥ 26"
             android:textColor="@color/themeBlue"
             android:textStyle="bold"
             android:textSize="12sp"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="right"
-        android:layout_marginBottom="10dp">
-
-        <Button
-            android:id="@+id/unfinish_order_list_cancel_but"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="取消订单"
-            android:textColor="#FFF"
-            android:background="@color/themeBlue"
-            android:foreground="?android:selectableItemBackground"
-            />
-
-        <Button
-            android:id="@+id/unfinish_order_list_finish_but"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:text="完成订单"
-            android:textColor="#FFF"
-            android:background="@color/themeBlue"
-            android:foreground="?android:selectableItemBackground"
             />
 
     </LinearLayout>

@@ -99,6 +99,7 @@
             android:paddingBottom="20dp"
             />
         <Button
+            android:id="@+id/manage_shop_my_manage_finished_order"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
