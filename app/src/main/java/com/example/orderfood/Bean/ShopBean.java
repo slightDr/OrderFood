@@ -1,6 +1,8 @@
 package com.example.orderfood.Bean;
 
-public class ShopBean {
+import java.io.Serializable;
+
+public class ShopBean implements Serializable {
     public ShopBean() {
     }
 

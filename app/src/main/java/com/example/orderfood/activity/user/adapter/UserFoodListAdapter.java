@@ -1,6 +1,7 @@
 package com.example.orderfood.activity.user.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,6 +27,7 @@ import com.example.orderfood.DAO.FoodDAO;
 import com.example.orderfood.DAO.ShopDAO;
 import com.example.orderfood.R;
 import com.example.orderfood.activity.shop.fragment.ManageShopUpdateFoodFragment;
+import com.example.orderfood.activity.user.foodAct.ManageUserBuyActivity;
 
 import java.util.List;
 
@@ -79,27 +81,14 @@ public class UserFoodListAdapter extends ArrayAdapter<FoodBean> {
         scoreView.setText(CommentDAO.getAvgScoreBySid(""+shopBean.getS_id())+"分");
 
 
-//        convertView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // 创建 Bundle 来封装数据
-//                Bundle bundle = new Bundle();
-//                bundle.putString("f_id", ""+food.getF_id());
-//                bundle.putString("f_img", food.getF_img());
-//                bundle.putString("f_name", food.getF_name());
-//                bundle.putString("f_price", ""+food.getF_price());
-//                bundle.putString("f_desc", food.getF_desc());
-//
-//                // 创建新的 Fragment 并设置 Bundle
-//                ManageShopUpdateFoodFragment fragment = new ManageShopUpdateFoodFragment();
-//                fragment.setArguments(bundle);
-//
-//                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.manage_shop_frame, fragment);
-//                fragmentTransaction.commit();
-//            }
-//        });
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ManageUserBuyActivity.class);
+                intent.putExtra("shop", shopBean);
+                getContext().startActivity(intent);
+            }
+        });
 
         return convertView;
     }

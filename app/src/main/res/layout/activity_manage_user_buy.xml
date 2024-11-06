@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.user.foodAct.ManageUserBuyActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/user_buy_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/themeBlue"
+        app:title="店铺信息"
+        app:titleTextColor="@color/white"
+        app:navigationIcon="@drawable/back"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:background="@color/slight_gray">
+
+        <ImageView
+            android:id="@+id/user_buy_shop_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/upload_img"
+            android:layout_margin="7dp"
+            android:scaleType="centerCrop"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/user_buy_shop_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="test"
+            android:layout_margin="7dp"
+            android:layout_toRightOf="@id/user_buy_shop_img"
+            android:textColor="#5a5a5a"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="center_horizontal|center_vertical"/>
+
+        <TextView
+            android:id="@+id/user_buy_shop_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="test desc"
+            android:layout_margin="7dp"
+            android:layout_toRightOf="@id/user_buy_shop_img"
+            android:layout_below="@id/user_buy_shop_name"
+            android:textStyle="bold|italic"
+            android:textColor="@color/gray"
+            android:textSize="18sp"
+            android:gravity="center_horizontal|center_vertical"/>
+
+    </RelativeLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/user_buy_tab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/themeBlue"
+        app:tabIndicatorHeight="4dp"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/user_buy_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+</LinearLayout>
