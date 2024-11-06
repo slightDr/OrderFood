@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/user_bottom_navi_home"
+        android:title="首页"
+        app:showAsAction="always"
+        android:icon="@drawable/home"
+        />
+
+    <item
+        android:id="@+id/user_bottom_navi_waiting"
+        android:title="待收货"
+        app:showAsAction="always"
+        android:icon="@drawable/waiting"
+        />
+
+    <item
+        android:id="@+id/user_bottom_navi_my"
+        android:title="我的"
+        app:showAsAction="always"
+        android:icon="@drawable/info"
+        />
+
+</menu>

@@ -19,10 +19,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.orderfood.DAO.ShopDAO;
 import com.example.orderfood.DAO.UserDAO;
 import com.example.orderfood.activity.shop.ManageShopActivity;
-import com.example.orderfood.activity.shop.ManageShopFinishOrderActivity;
-import com.example.orderfood.activity.shop.ManageShopManageCommentActivity;
 import com.example.orderfood.activity.shop.ManageShopShowFinishedOrderActivity;
 import com.example.orderfood.activity.shop.RegisterShopActivity;
+import com.example.orderfood.activity.user.ManageUserActivity;
 import com.example.orderfood.activity.user.RegisterUserActivity;
 import com.example.orderfood.db.DBClient;
 
@@ -48,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         /** 调试用 */
-//        Intent intent = new Intent(MainActivity.this, ManageShopShowFinishedOrderActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(MainActivity.this, ManageUserActivity.class);
+        startActivity(intent);
 
         // 登陆界面单选默认选择商家
         RadioButton shop_radio = findViewById(R.id.login_as_shop);
@@ -88,10 +87,15 @@ public class MainActivity extends AppCompatActivity {
                     }
                 } else { // 用户登录
                     int result = UserDAO.loginAsUser(loginName, loginPwd);
-                    if (result == 0) {
-                        Toast.makeText(MainActivity.this, "用户登录成功", Toast.LENGTH_SHORT).show();
-                    } else {
+                    if (result == -1) {
                         Toast.makeText(MainActivity.this, "用户账号或密码错误", Toast.LENGTH_SHORT).show();
+                    } else {
+                        editor.putString("u_id", ""+result);
+                        editor.apply();
+                        Toast.makeText(MainActivity.this, "用户登录成功", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, ManageUserActivity.class);
+                        startActivity(intent);
+                        loginPwdText.setText("");
                     }
                 }
             }

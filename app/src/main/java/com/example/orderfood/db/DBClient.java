@@ -15,7 +15,7 @@ import com.example.orderfood.util.FileImgUtil;
  */
 public class DBClient extends SQLiteOpenHelper {
 
-    private static final int ver = 21;  // 版本号，每次更改表结构都需要+1，否则不生效
+    private static final int ver = 22;  // 版本号，每次更改表结构都需要+1，否则不生效
     private static final String dbName = "db_orderfood.db";  // 数据库名称
     private Context context;
 
@@ -30,6 +30,10 @@ public class DBClient extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         // 创建数据库
         sqLiteDatabase.execSQL("PRAGMA foreign_keys = false"); // 外键失效
+        String foodPath1 = FileImgUtil.getPicAbsPath();
+        FileImgUtil.saveDefaultImgToPath(context, R.drawable.mlt, foodPath1);
+        String foodPath2 = FileImgUtil.getPicAbsPath();
+        FileImgUtil.saveDefaultImgToPath(context, R.drawable.upload_img, foodPath2);
 
         /** 存储商家 */
         sqLiteDatabase.execSQL("drop table if exists shops"); //如果这表存在则删
@@ -43,7 +47,7 @@ public class DBClient extends SQLiteOpenHelper {
             "s_img varchar(255))"); // 图片路径
         // 初始商家
         sqLiteDatabase.execSQL("insert into shops values(?,?,?,?,?,?)",
-                new Object[]{null, "123456", "test", "测试", "测试", ""});
+                new Object[]{null, "123456", "test", "测试", "测试", foodPath1});
 
         /** 存储用户 */
         sqLiteDatabase.execSQL("drop table if exists users"); //如果这表存在则删
@@ -72,12 +76,8 @@ public class DBClient extends SQLiteOpenHelper {
                 "f_price float," +
                 "f_img varchar(255))"); // 图片路径
         // 初始食品
-        String foodPath1 = FileImgUtil.getPicAbsPath();
-        FileImgUtil.saveDefaultImgToPath(context, R.drawable.mlt, foodPath1);
         sqLiteDatabase.execSQL("insert into foods values(?,?,?,?,?,?)",
                 new Object[]{null, 1, "f_test1", "f_test1", 0.01, foodPath1});
-        String foodPath2 = FileImgUtil.getPicAbsPath();
-        FileImgUtil.saveDefaultImgToPath(context, R.drawable.upload_img, foodPath2);
         sqLiteDatabase.execSQL("insert into foods values(?,?,?,?,?,?)",
                 new Object[]{null, 1, "f_test2", "f_test2", 0.02, foodPath2});
 

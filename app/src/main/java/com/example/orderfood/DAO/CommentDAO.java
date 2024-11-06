@@ -30,4 +30,13 @@ public class CommentDAO {
         }
         return ret;
     }
+
+    public static float getAvgScoreBySid(String s_id) {
+        Cursor cursor = conn.rawQuery("select avg(comment_score) as score from comments where s_id=?",
+                new String[]{s_id});
+        if (cursor.moveToFirst()) {
+            return cursor.getFloat(0);
+        }
+        return 0;
+    }
 }

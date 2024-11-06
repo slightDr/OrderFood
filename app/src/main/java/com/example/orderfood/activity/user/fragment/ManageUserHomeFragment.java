@@ -1,34 +1,28 @@
-package com.example.orderfood.activity.shop.fragment;
+package com.example.orderfood.activity.user.fragment;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
 import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
 
 import com.example.orderfood.Bean.FoodBean;
 import com.example.orderfood.DAO.FoodDAO;
 import com.example.orderfood.R;
 import com.example.orderfood.activity.shop.adapter.ShopFoodListAdapter;
+import com.example.orderfood.activity.user.adapter.UserFoodListAdapter;
 
 import java.util.List;
 
 /**
  * A fragment representing a list of Items.
  */
-public class ManageShopHomeFragment extends Fragment {
+public class ManageUserHomeFragment extends Fragment {
 
     View rootView;
 
@@ -36,17 +30,17 @@ public class ManageShopHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        rootView = inflater.inflate(R.layout.fragment_manage_shop_home, container, false);
+        rootView = inflater.inflate(R.layout.fragment_manage_user_home, container, false);
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("data", Context.MODE_PRIVATE);
-        String s_id = sharedPreferences.getString("s_id", "");
+        String u_id = sharedPreferences.getString("u_id", "1");
 
         // 适配器
-        ListView listView = rootView.findViewById(R.id.shop_home_food_listview);
-        List<FoodBean> allFood = FoodDAO.getAllFoodBySid(s_id);
-        if (allFood.isEmpty()) {
+        ListView listView = rootView.findViewById(R.id.user_home_food_listview);
+        List<FoodBean> allFoods = FoodDAO.getAllFood();
+        if (allFoods.isEmpty()) {
             listView.setAdapter(null);
         } else {
-            listView.setAdapter(new ShopFoodListAdapter(getContext(), allFood));
+            listView.setAdapter(new UserFoodListAdapter(getContext(), allFoods));
         }
 
         // 搜索商品
@@ -54,7 +48,7 @@ public class ManageShopHomeFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) { // 根据name查找
-                List<FoodBean> foodBeanList = FoodDAO.getFoodBySidName(s_id, s);
+                List<FoodBean> foodBeanList = FoodDAO.getFoodByName(s);
                 if (foodBeanList.isEmpty()) {
                     listView.setAdapter(null);
                 } else {
@@ -65,7 +59,7 @@ public class ManageShopHomeFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                List<FoodBean> foodBeanList = FoodDAO.getFoodBySidName(s_id, s);
+                List<FoodBean> foodBeanList = FoodDAO.getFoodByName(s);
                 if (foodBeanList.isEmpty()) {
                     listView.setAdapter(null);
                 } else {

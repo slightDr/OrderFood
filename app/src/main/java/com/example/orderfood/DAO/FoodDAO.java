@@ -15,6 +15,29 @@ public class FoodDAO {
     public static SQLiteDatabase conn = DBClient.connection;
 
     /**
+     * 通过s_id获取食物列表
+     * @return
+     */
+    public static List<FoodBean> getAllFoodBySid(String sid) {
+        List<FoodBean> ret = new ArrayList<>();
+        Cursor cursor = conn.rawQuery("select * from foods where s_id=?",
+                new String[]{sid});
+        while (cursor.moveToNext()) {
+            Integer f_id = cursor.getInt(0);
+            Integer s_id = cursor.getInt(1);
+            String f_name = cursor.getString(2);
+            String f_desc = cursor.getString(3);
+            float f_price = cursor.getFloat(4);
+            String f_img = cursor.getString(5);
+            FoodBean foodBean = new FoodBean(
+                    f_id, s_id, f_name, f_desc, f_price, f_img
+            );
+            ret.add(foodBean);
+        }
+        return ret;
+    }
+
+    /**
      * 获取食物列表
      * @return
      */
@@ -128,5 +151,27 @@ public class FoodDAO {
         } catch (Exception e) {
             return 1;
         }
+    }
+
+    /**
+     * 通过s查询食物
+     */
+    public static List<FoodBean> getFoodByName(String name) {
+        List<FoodBean> ret = new ArrayList<>();
+        Cursor cursor = conn.rawQuery("select * from foods where f_name like ?",
+                new String[]{"%"+name+"%"});
+        while (cursor.moveToNext()) {
+            Integer f_id = cursor.getInt(0);
+            Integer s_id = cursor.getInt(1);
+            String f_name = cursor.getString(2);
+            String f_desc = cursor.getString(3);
+            float f_price = cursor.getFloat(4);
+            String f_img = cursor.getString(5);
+            FoodBean foodBean = new FoodBean(
+                    f_id, s_id, f_name, f_desc, f_price, f_img
+            );
+            ret.add(foodBean);
+        }
+        return ret;
     }
 }
