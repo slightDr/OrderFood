@@ -20,6 +20,7 @@ import com.example.orderfood.DAO.ShopDAO;
 import com.example.orderfood.DAO.UserDAO;
 import com.example.orderfood.activity.shop.ManageShopActivity;
 import com.example.orderfood.activity.shop.ManageShopFinishOrderActivity;
+import com.example.orderfood.activity.shop.ManageShopManageCommentActivity;
 import com.example.orderfood.activity.shop.RegisterShopActivity;
 import com.example.orderfood.activity.user.RegisterUserActivity;
 import com.example.orderfood.db.DBClient;
@@ -46,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         /** 调试用 */
-//        Intent intent = new Intent(MainActivity.this, ManageShopFinishOrderActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(MainActivity.this, ManageShopManageCommentActivity.class);
+        startActivity(intent);
 
         // 登陆界面单选默认选择商家
         RadioButton shop_radio = findViewById(R.id.login_as_shop);

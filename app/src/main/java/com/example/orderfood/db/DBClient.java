@@ -15,7 +15,7 @@ import com.example.orderfood.util.FileImgUtil;
  */
 public class DBClient extends SQLiteOpenHelper {
 
-    private static final int ver = 18;  // 版本号，每次更改表结构都需要+1，否则不生效
+    private static final int ver = 21;  // 版本号，每次更改表结构都需要+1，否则不生效
     private static final String dbName = "db_orderfood.db";  // 数据库名称
     private Context context;
 
@@ -118,6 +118,25 @@ public class DBClient extends SQLiteOpenHelper {
                 new Object[]{null, 2, 2, "f_test2", "f_test2", .02, foodPath2, 22});
         sqLiteDatabase.execSQL("insert into order_details values(?,?,?,?,?,?,?,?)",
                 new Object[]{null, 3, 1, "f_test1", "f_test1", .01, foodPath1, 333});
+
+        /** 评论表 */
+        sqLiteDatabase.execSQL("drop table if exists comments"); //如果这表存在则删
+        sqLiteDatabase.execSQL("create table comments(" +
+                "comment_id integer primary key autoincrement," +
+                "u_id integer references users(u_id)," +
+                "s_id integer references shops(s_id)," +
+                "comment_time varchar(50)," +
+                "comment_content varchar(200)," +
+                "comment_score integer," +
+                "comment_img varchar(255))");
+        sqLiteDatabase.execSQL("insert into comments values(?,?,?,?,?,?,?)",
+                new Object[]{null, 1, 1, "2024-11-01 12:34:56", "一级棒", 4, foodPath1});
+        sqLiteDatabase.execSQL("insert into comments values(?,?,?,?,?,?,?)",
+                new Object[]{null, 1, 1, "2024-11-02 12:34:56", "一般", 3, foodPath2});
+        sqLiteDatabase.execSQL("insert into comments values(?,?,?,?,?,?,?)",
+                new Object[]{null, 1, 1, "2024-11-03 12:34:56", "垃圾", 1, foodPath1});
+        sqLiteDatabase.execSQL("insert into comments values(?,?,?,?,?,?,?)",
+                new Object[]{null, 1, 1, "2024-11-04 12:34:56", "好吃", 5, foodPath2});
 
         sqLiteDatabase.execSQL("PRAGMA foreign_keys = true");
     }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.shop.ManageShopManageCommentActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/manage_shop_manage_comment_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigationIcon="@drawable/back"
+        android:background="@color/themeBlue"
+        app:title="评论管理"
+        app:titleTextColor="@color/white"/>
+
+    <ListView
+        android:id="@+id/manage_shop_comment_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="10dp"
+        android:layout_gravity="center"
+        android:divider="@android:color/transparent"
+        android:layout_marginTop="10dp"
+        />
+
+</LinearLayout>
