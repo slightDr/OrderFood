@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:background="@color/white"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <ImageView
+            android:id="@+id/user_buy_shop_food_item_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/info"
+            android:layout_marginLeft="7dp"
+            android:scaleType="centerCrop"
+            android:paddingLeft="5dp"
+            android:background="@drawable/img_round"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/user_buy_shop_food_item_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="aaaaaa"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:layout_marginTop="1dp"
+                />
+
+            <TextView
+                android:id="@+id/user_buy_shop_food_item_monthsale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="月销售"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:layout_marginTop="3dp"
+                />
+
+            <TextView
+                android:id="@+id/user_buy_shop_food_item_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="价格"
+                android:textColor="@color/themeBlue"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:layout_marginTop="3dp"
+                />
+
+            <TextView
+                android:id="@+id/user_buy_shop_food_item_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="描述"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:layout_marginTop="3dp"
+                />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/slight_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/white"
+        android:gravity="right"
+        android:paddingEnd="20dp">
+
+        <ImageView
+            android:id="@+id/user_buy_shop_food_item_minus"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/img_round"
+            android:scaleType="centerCrop"
+            android:src="@drawable/minus_food"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/user_buy_shop_food_item_num"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="0"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+
+        <ImageView
+            android:id="@+id/user_buy_shop_food_item_add"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/img_round"
+            android:scaleType="centerCrop"
+            android:src="@drawable/add_food"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+</LinearLayout>

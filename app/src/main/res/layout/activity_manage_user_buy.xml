@@ -71,4 +71,50 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/totalprice"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="￥"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:padding="3dp"/>
+
+        <TextView
+            android:id="@+id/user_buy_shop_food_total_price"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="0"
+            android:gravity="center_vertical|start"
+            android:padding="3dp"
+            android:layout_weight="3"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_round"
+            android:foreground="?android:selectableItemBackground"
+            android:text="去结算"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:layout_gravity="right"/>
+
+    </LinearLayout>
+
 </LinearLayout>

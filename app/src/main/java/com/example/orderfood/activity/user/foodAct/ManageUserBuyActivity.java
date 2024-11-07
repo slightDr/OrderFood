@@ -23,6 +23,8 @@ import com.example.orderfood.Bean.ShopBean;
 import com.example.orderfood.R;
 import com.example.orderfood.activity.shop.fragment.ManageShopHomeFragment;
 import com.example.orderfood.activity.shop.fragment.ManageShopMyFragment;
+import com.example.orderfood.activity.user.fragment.ManageUserBuyShopFoodFragment;
+import com.example.orderfood.activity.user.fragment.ManageUserCommentFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -62,6 +64,10 @@ public class ManageUserBuyActivity extends AppCompatActivity {
         TextView descText = findViewById(R.id.user_buy_shop_desc);
         descText.setText(shop.getS_desc());
 
+        // 实现显示总价
+        TextView priceView = findViewById(R.id.user_buy_shop_food_total_price);
+        priceView.setText("0");
+
         // 选项卡
         TabLayout tabLayout = findViewById(R.id.user_buy_tab);
         ViewPager2 viewPager = findViewById(R.id.user_buy_pager);
@@ -70,9 +76,9 @@ public class ManageUserBuyActivity extends AppCompatActivity {
             @Override
             public Fragment createFragment(int position) {
                 if (position == 0) {
-                    return new ManageShopHomeFragment();
+                    return new ManageUserBuyShopFoodFragment(""+shop.getS_id(), priceView);
                 } else {
-                    return new ManageShopMyFragment();
+                    return new ManageUserCommentFragment(""+shop.getS_id());
                 }
             }
 
