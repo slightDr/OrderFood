@@ -25,6 +25,10 @@ import com.example.orderfood.DAO.ShopDAO;
 import com.example.orderfood.R;
 import com.example.orderfood.activity.user.foodAct.ManageUserBuyActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
@@ -35,12 +39,21 @@ public class UserBuyShopFoodListAdapter extends ArrayAdapter<FoodBean> {
     private List<FoodBean> list;
     private Context context;
     private TextView priceView;
+    private JSONObject foodJson;
 
-    public UserBuyShopFoodListAdapter(@NonNull Context context, List<FoodBean> list, TextView priceView) {
+    public UserBuyShopFoodListAdapter(@NonNull Context context, List<FoodBean> list, TextView priceView, JSONObject foodJson) {
         super(context, R.layout.list_user_home_food, list);
         this.context = context;
         this.list = list;
         this.priceView = priceView;
+        this.foodJson = foodJson;
+        for (FoodBean food : list) {
+            try {
+                foodJson.put(""+food.getF_id(), 0);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @Override
@@ -84,6 +97,13 @@ public class UserBuyShopFoodListAdapter extends ArrayAdapter<FoodBean> {
                 float priceF = Float.valueOf(price);
                 priceF += food.getF_price();
                 priceView.setText(""+Math.round(priceF*100.0)/100.0);
+
+                try {
+                    foodJson.put(""+food.getF_id(), numI);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+//                Log.d("user", foodJson.toString());
             }
         });
         minusView.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +119,13 @@ public class UserBuyShopFoodListAdapter extends ArrayAdapter<FoodBean> {
 
                 priceView.setText(""+Math.round(priceF*100.0)/100.0);
                 numView.setText(""+numI);
+
+                try {
+                    foodJson.put(""+food.getF_id(), numI);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+//                Log.d("user", foodJson.toString());
             }
         });
 

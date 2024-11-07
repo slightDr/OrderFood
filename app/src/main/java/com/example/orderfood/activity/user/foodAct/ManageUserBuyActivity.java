@@ -4,7 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,9 +32,24 @@ import com.example.orderfood.activity.user.fragment.ManageUserCommentFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
 public class ManageUserBuyActivity extends AppCompatActivity {
+
+    private Handler handler;
+    private Runnable runnable;
+    public JSONObject foodJson;  // 购买商品和对应数量
+
+    public ManageUserBuyActivity() {
+        super();
+        // 存储选择的商品和数量
+        if (foodJson == null) {
+            foodJson = new JSONObject();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,5 +113,14 @@ public class ManageUserBuyActivity extends AppCompatActivity {
                 tab.setText("评论");
             }
         })).attach();
+
+        // 购买
+        Button buyButton = findViewById(R.id.user_buy_shop_food_button);
+        buyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("user", foodJson.toString());
+            }
+        });
     }
 }

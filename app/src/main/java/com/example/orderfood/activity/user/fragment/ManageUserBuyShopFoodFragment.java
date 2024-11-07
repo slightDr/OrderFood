@@ -18,6 +18,10 @@ import com.example.orderfood.R;
 import com.example.orderfood.activity.shop.adapter.ShopFoodListAdapter;
 import com.example.orderfood.activity.user.adapter.UserBuyShopFoodListAdapter;
 import com.example.orderfood.activity.user.adapter.UserFoodListAdapter;
+import com.example.orderfood.activity.user.foodAct.ManageUserBuyActivity;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -29,6 +33,7 @@ public class ManageUserBuyShopFoodFragment extends Fragment {
     View rootView;
     String s_id;
     TextView priceView;
+    ManageUserBuyActivity activity;
 
     public ManageUserBuyShopFoodFragment(String s_id, TextView priceView) {
         super();
@@ -45,14 +50,21 @@ public class ManageUserBuyShopFoodFragment extends Fragment {
         String u_id = sharedPreferences.getString("u_id", "1");
 
         // 适配器
+        activity = (ManageUserBuyActivity) getActivity();
         ListView listView = rootView.findViewById(R.id.user_buy_shop_food_listview);
         List<FoodBean> allFoods = FoodDAO.getAllFoodBySid(s_id);
         if (allFoods.isEmpty()) {
             listView.setAdapter(null);
         } else {
-            listView.setAdapter(new UserBuyShopFoodListAdapter(getContext(), allFoods, priceView));
+            listView.setAdapter(new UserBuyShopFoodListAdapter(getContext(), allFoods, priceView, activity.foodJson));
         }
 
         return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        activity.foodJson = new JSONObject();
     }
 }
