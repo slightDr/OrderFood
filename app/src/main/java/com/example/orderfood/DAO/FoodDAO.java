@@ -98,9 +98,7 @@ public class FoodDAO {
     }
 
     /**
-     * 用fid获取食物月销量
-     * @param f_id
-     * @return
+     * 用fid和sid获取食物月销量
      */
     public static int getMonthSale(String f_id, String s_id) {
         Integer ret = 0;
@@ -117,6 +115,23 @@ public class FoodDAO {
             }
         }
         return ret;
+    }
+
+    public static FoodBean getFoodByFid(String fid) {
+        Cursor cursor = conn.rawQuery("select * from foods where f_id=?",
+                new String[]{fid});
+        if (cursor.moveToFirst()) {
+            Integer f_id = cursor.getInt(0);
+            Integer s_id = cursor.getInt(1);
+            String f_name = cursor.getString(2);
+            String f_desc = cursor.getString(3);
+            float f_price = cursor.getFloat(4);
+            String f_img = cursor.getString(5);
+            return new FoodBean(
+                    f_id, s_id, f_name, f_desc, f_price, f_img
+            );
+        }
+        return null;
     }
 
     public static int addFood(String s_id, String name, String price, String desc, String img) {
@@ -154,7 +169,7 @@ public class FoodDAO {
     }
 
     /**
-     * 通过s查询食物
+     * 通过字段查询食物
      */
     public static List<FoodBean> getFoodByName(String name) {
         List<FoodBean> ret = new ArrayList<>();

@@ -15,7 +15,7 @@ import com.example.orderfood.util.FileImgUtil;
  */
 public class DBClient extends SQLiteOpenHelper {
 
-    private static final int ver = 22;  // 版本号，每次更改表结构都需要+1，否则不生效
+    private static final int ver = 23;  // 版本号，每次更改表结构都需要+1，否则不生效
     private static final String dbName = "db_orderfood.db";  // 数据库名称
     private Context context;
 
@@ -55,16 +55,30 @@ public class DBClient extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("create table users(" +
                 "u_id integer primary key autoincrement," +
                 "u_pwd varchar(20)," +
-                "u_name varchar(20) unique," +
+                "u_name varchar(20) unique," +  // 账号名
                 "u_sex varchar(20)," +
-                "u_addr varchar(200)," +
-                "u_tel varchar(20)," +
                 "u_img varchar(255))"); // 图片路径
         // 初始用户
         String userPath = FileImgUtil.getPicAbsPath();
         FileImgUtil.saveDefaultImgToPath(context, R.drawable.upload_img, userPath);
-        sqLiteDatabase.execSQL("insert into users values(?,?,?,?,?,?,?)",
-                new Object[]{null, "123456", "u_test", "男", "test address", "test tel", userPath});
+        sqLiteDatabase.execSQL("insert into users values(?,?,?,?,?)",
+                new Object[]{null, "123456", "test", "男", userPath});
+
+        /** 存储用户收货信息 */
+        sqLiteDatabase.execSQL("drop table if exists user_infos"); //如果这表存在则删
+        // 收货信息
+        sqLiteDatabase.execSQL("create table user_infos(" +
+                "i_id integer primary key autoincrement," +
+                "u_id integer references users(u_id)," +
+                "i_name varchar(20)," +  // 收货人姓名
+                "i_addr varchar(200)," +
+                "i_tel varchar(20))");
+        sqLiteDatabase.execSQL("insert into user_infos values(?,?,?,?,?)",
+                new Object[]{null, 1, "u_test1", "test address1", "test tel1"});
+        sqLiteDatabase.execSQL("insert into user_infos values(?,?,?,?,?)",
+                new Object[]{null, 1, "u_test2", "test address2", "test tel2"});
+        sqLiteDatabase.execSQL("insert into user_infos values(?,?,?,?,?)",
+                new Object[]{null, 1, "u_test3", "test address3", "test tel3"});
 
         /** 存储商品 */
         sqLiteDatabase.execSQL("drop table if exists foods"); //如果这表存在则删
@@ -89,14 +103,14 @@ public class DBClient extends SQLiteOpenHelper {
                 "s_id integer references shops(s_id)," +
                 "u_id integer references users(u_id)," +
                 "o_status integer," + // 订单状态: 1未处理订单 2取消订单 3完成订单
-                "o_addr varchar(255))"); // 收货地址
+                "i_id integer references user_infos(i_id))"); // 收货信息id
         // 初始订单
         sqLiteDatabase.execSQL("insert into orders values(?,?,?,?,?,?)",
-                new Object[]{null, "2024-11-01 12:34:56", 1, 1, 3, "test addr"});
+                new Object[]{null, "2024-11-01 12:34:56", 1, 1, 3, 1});
         sqLiteDatabase.execSQL("insert into orders values(?,?,?,?,?,?)",
-                new Object[]{null, "2024-11-02 12:34:56", 1, 1, 1, "test addr"});
+                new Object[]{null, "2024-11-02 12:34:56", 1, 1, 1, 2});
         sqLiteDatabase.execSQL("insert into orders values(?,?,?,?,?,?)",
-                new Object[]{null, "2024-11-03 12:34:56", 1, 1, 2, "test addr"});
+                new Object[]{null, "2024-11-03 12:34:56", 1, 1, 2, 3});
 
         /** 订单详情表 */
         sqLiteDatabase.execSQL("drop table if exists order_details"); //如果这表存在则删

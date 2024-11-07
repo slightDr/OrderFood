@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -27,15 +28,19 @@ import com.example.orderfood.Bean.ShopBean;
 import com.example.orderfood.R;
 import com.example.orderfood.activity.shop.fragment.ManageShopHomeFragment;
 import com.example.orderfood.activity.shop.fragment.ManageShopMyFragment;
+import com.example.orderfood.activity.user.RegisterUserActivity;
+import com.example.orderfood.activity.user.dialog.UserBuyFoodDialog;
 import com.example.orderfood.activity.user.fragment.ManageUserBuyShopFoodFragment;
 import com.example.orderfood.activity.user.fragment.ManageUserCommentFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.Iterator;
 
 public class ManageUserBuyActivity extends AppCompatActivity {
 
@@ -114,11 +119,29 @@ public class ManageUserBuyActivity extends AppCompatActivity {
             }
         })).attach();
 
-        // 购买
+        // 点击结算按钮
         Button buyButton = findViewById(R.id.user_buy_shop_food_button);
         buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                boolean has_bought = false;
+                for (Iterator<String> it = foodJson.keys(); it.hasNext(); ) {
+                    String key = it.next();
+                    try {
+                        if (foodJson.getInt(key) != 0) {
+                            has_bought = true;
+                            break;
+                        }
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                if (!has_bought) {
+                    Toast.makeText(ManageUserBuyActivity.this, "未选择任何商品", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                UserBuyFoodDialog userBuyFoodDialog = new UserBuyFoodDialog(ManageUserBuyActivity.this,
+                        ""+shop.getS_id(), foodJson, priceView.getText().toString());
                 Log.d("user", foodJson.toString());
             }
         });

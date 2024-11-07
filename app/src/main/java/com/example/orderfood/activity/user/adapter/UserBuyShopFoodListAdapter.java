@@ -62,10 +62,8 @@ public class UserBuyShopFoodListAdapter extends ArrayAdapter<FoodBean> {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.list_user_buy_food_item, viewGroup, false);
         }
-//        SharedPreferences sharedPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE);
-//        String u_id = sharedPreferences.getString("u_id", "1");
+
         FoodBean food = list.get(position);
-//        ShopBean shopBean = ShopDAO.getShopInfoBySid(""+food.getS_id());
 
         // 商品信息
         ImageView imageView = convertView.findViewById(R.id.user_buy_shop_food_item_img);
@@ -103,7 +101,6 @@ public class UserBuyShopFoodListAdapter extends ArrayAdapter<FoodBean> {
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
-//                Log.d("user", foodJson.toString());
             }
         });
         minusView.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +122,6 @@ public class UserBuyShopFoodListAdapter extends ArrayAdapter<FoodBean> {
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
-//                Log.d("user", foodJson.toString());
             }
         });
 

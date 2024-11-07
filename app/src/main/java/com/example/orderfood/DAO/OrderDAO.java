@@ -7,6 +7,7 @@ import android.util.Log;
 import com.example.orderfood.Bean.OrderBean;
 import com.example.orderfood.Bean.OrderDetailBean;
 import com.example.orderfood.Bean.UserBean;
+import com.example.orderfood.Bean.UserInfoBean;
 import com.example.orderfood.db.DBClient;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class OrderDAO {
                     cursor.getInt(2),
                     cursor.getInt(3),
                     cursor.getInt(4),
-                    cursor.getString(5)
+                    cursor.getInt(5)
             ));
         }
         return ret;
@@ -50,7 +51,7 @@ public class OrderDAO {
                     cursor.getInt(2),
                     cursor.getInt(3),
                     cursor.getInt(4),
-                    cursor.getString(5)
+                    cursor.getInt(5)
             ));
         }
         return ret;
@@ -103,9 +104,9 @@ public class OrderDAO {
                 ret.add(orderBean);
                 continue;
             }
-            int u_id = orderBean.getU_id();
-            UserBean userBean = UserDAO.getUserInfoByUid("" + u_id);
-            if (userBean.getU_tel().contains(str)) {
+            int i_id = orderBean.getI_id();
+            UserInfoBean userInfo = UserInfoDAO.getUserInfoByIid(""+i_id);
+            if (userInfo.getITel().contains(str)) {
                 // Log.d("mine", "tel, "+orderBean.toString());
                 ret.add(orderBean);
             }

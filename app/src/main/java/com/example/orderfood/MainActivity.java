@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         /** 调试用 */
-        Intent intent = new Intent(MainActivity.this, ManageUserActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(MainActivity.this, ManageUserActivity.class);
+//        startActivity(intent);
 
         // 登陆界面单选默认选择商家
         RadioButton shop_radio = findViewById(R.id.login_as_shop);

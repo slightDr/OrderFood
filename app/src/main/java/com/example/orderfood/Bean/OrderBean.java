@@ -5,13 +5,13 @@ public class OrderBean {
     public OrderBean() {
     }
 
-    public OrderBean(int o_id, String o_time, int s_id, int u_id, int o_status, String o_addr) {
+    public OrderBean(int o_id, String o_time, int s_id, int u_id, int o_status, int i_id) {
         this.o_id = o_id;
         this.o_time = o_time;
         this.s_id = s_id;
         this.u_id = u_id;
         this.o_status = o_status;
-        this.o_addr = o_addr;
+        this.i_id = i_id;
     }
 
     public int getO_id() {
@@ -54,12 +54,12 @@ public class OrderBean {
         this.o_status = o_status;
     }
 
-    public String getO_addr() {
-        return o_addr;
+    public int getI_id() {
+        return i_id;
     }
 
-    public void setO_addr(String o_addr) {
-        this.o_addr = o_addr;
+    public void setI_id(int i_id) {
+        this.i_id = i_id;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class OrderBean {
                 ", s_id=" + s_id +
                 ", u_id=" + u_id +
                 ", o_status=" + o_status +
-                ", o_addr='" + o_addr + '\'' +
+                ", i_id='" + i_id + '\'' +
                 '}';
     }
 
@@ -79,5 +79,5 @@ public class OrderBean {
     private int s_id;
     private int u_id;
     private int o_status;
-    private String o_addr;
+    private int i_id;
 }

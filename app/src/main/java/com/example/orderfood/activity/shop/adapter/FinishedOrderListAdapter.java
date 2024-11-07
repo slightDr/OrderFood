@@ -18,8 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.orderfood.Bean.OrderBean;
 import com.example.orderfood.Bean.OrderDetailBean;
 import com.example.orderfood.Bean.UserBean;
+import com.example.orderfood.Bean.UserInfoBean;
 import com.example.orderfood.DAO.OrderDAO;
 import com.example.orderfood.DAO.UserDAO;
+import com.example.orderfood.DAO.UserInfoDAO;
 import com.example.orderfood.R;
 
 import java.util.List;
@@ -46,6 +48,7 @@ public class FinishedOrderListAdapter extends ArrayAdapter<OrderBean> {
         }
         OrderBean order = list.get(position);
         UserBean user = UserDAO.getUserInfoByUid(""+order.getU_id());
+        UserInfoBean userInfo = UserInfoDAO.getUserInfoByIid(""+order.getI_id());
 
         // 加载订单信息
         ImageView imageView = convertView.findViewById(R.id.finished_order_user_img);
@@ -55,11 +58,11 @@ public class FinishedOrderListAdapter extends ArrayAdapter<OrderBean> {
         TextView timeText = convertView.findViewById(R.id.finished_order_time);
         timeText.setText(order.getO_time());
         TextView nameText = convertView.findViewById(R.id.finished_order_user_name);
-        nameText.setText(user.getU_name());
+        nameText.setText(userInfo.getIName());
         TextView addrText = convertView.findViewById(R.id.finished_order_user_addr);
-        addrText.setText(order.getO_addr());
+        addrText.setText(userInfo.getIAddr());
         TextView telText = convertView.findViewById(R.id.finished_order_user_tel);
-        telText.setText(user.getU_tel());
+        telText.setText(userInfo.getITel());
 
         // 加载订单详细信息
         RecyclerView detailList = convertView.findViewById(R.id.finished_order_detail_list);
