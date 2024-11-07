@@ -66,7 +66,7 @@ public class ManageUserBuyActivity extends AppCompatActivity {
 
         // 实现显示总价
         TextView priceView = findViewById(R.id.user_buy_shop_food_total_price);
-        priceView.setText("0");
+        priceView.setText("0.00");
 
         // 选项卡
         TabLayout tabLayout = findViewById(R.id.user_buy_tab);

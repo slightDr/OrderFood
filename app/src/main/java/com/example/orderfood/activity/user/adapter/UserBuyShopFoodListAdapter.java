@@ -91,13 +91,14 @@ public class UserBuyShopFoodListAdapter extends ArrayAdapter<FoodBean> {
             public void onClick(View view) {
                 String num = numView.getText().toString();
                 int numI = Integer.valueOf(num);
-                numI = numI > 0 ? numI - 1 : numI;
-                numView.setText(""+numI);
-
                 String price = priceView.getText().toString();
                 float priceF = Float.valueOf(price);
-                priceF -= food.getF_price();
+
+                priceF -= numI > 0 ? food.getF_price() : 0;
+                numI -= numI > 0 ? 1 : 0;
+
                 priceView.setText(""+Math.round(priceF*100.0)/100.0);
+                numView.setText(""+numI);
             }
         });
 
