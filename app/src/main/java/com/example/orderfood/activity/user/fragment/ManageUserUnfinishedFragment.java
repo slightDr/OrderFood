@@ -12,8 +12,11 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import com.example.orderfood.Bean.FoodBean;
+import com.example.orderfood.Bean.OrderBean;
 import com.example.orderfood.DAO.FoodDAO;
+import com.example.orderfood.DAO.OrderDAO;
 import com.example.orderfood.R;
+import com.example.orderfood.activity.shop.ManageShopFinishOrderActivity;
 import com.example.orderfood.activity.shop.adapter.ShopFoodListAdapter;
 import com.example.orderfood.activity.shop.adapter.UnfinishOrderListAdapter;
 import com.example.orderfood.activity.user.adapter.UserFoodListAdapter;
@@ -37,35 +40,38 @@ public class ManageUserUnfinishedFragment extends Fragment {
         String u_id = sharedPreferences.getString("u_id", "1");
 
         // 适配器
-        ListView listView = rootView.findViewById(R.id.user_home_food_listview);
-        List<FoodBean> allFoods = FoodDAO.getAllFood();
-        if (allFoods.isEmpty()) {
+        ListView listView = rootView.findViewById(R.id.user_unfinished_listview);
+//        List<FoodBean> allFoods = FoodDAO.getAllFood();
+        List<OrderBean> allOrders = OrderDAO.getAllOrdersByUidStatus(u_id, "1");
+        if (allOrders.isEmpty()) {
             listView.setAdapter(null);
         } else {
-            listView.setAdapter(new UserUnfinishedListAdapter(getContext(), allFoods));
+            listView.setAdapter(new UserUnfinishedListAdapter(getContext(), allOrders));
         }
 
         // 搜索商品
-        SearchView searchView = rootView.findViewById(R.id.manage_shop_home_search);
+        SearchView searchView = rootView.findViewById(R.id.manage_user_unfinished_search);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String s) { // 根据name查找
-                List<FoodBean> foodBeanList = FoodDAO.getFoodByName(s);
-                if (foodBeanList.isEmpty()) {
+            public boolean onQueryTextSubmit(String s) {
+                List<OrderBean> orders = OrderDAO.getFromOrdersByStr(allOrders, s);
+                // Log.d("mine", ""+orders.size());
+                if (orders.isEmpty()) {
                     listView.setAdapter(null);
                 } else {
-                    listView.setAdapter(new ShopFoodListAdapter(getContext(), foodBeanList));
+                    listView.setAdapter(new UserUnfinishedListAdapter(getContext(), orders));
                 }
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                List<FoodBean> foodBeanList = FoodDAO.getFoodByName(s);
-                if (foodBeanList.isEmpty()) {
+                List<OrderBean> orders = OrderDAO.getFromOrdersByStr(allOrders, s);
+                // Log.d("mine", ""+orders.size());
+                if (orders.isEmpty()) {
                     listView.setAdapter(null);
                 } else {
-                    listView.setAdapter(new ShopFoodListAdapter(getContext(), foodBeanList));
+                    listView.setAdapter(new UserUnfinishedListAdapter(getContext(), orders));
                 }
                 return true;
             }

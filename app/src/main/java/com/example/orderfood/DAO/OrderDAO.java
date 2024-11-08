@@ -58,6 +58,27 @@ public class OrderDAO {
     }
 
     /**
+     * 查看u_id所有对应状态的订单
+     */
+    public static List<OrderBean> getAllOrdersByUidStatus(String u_id, String status) {
+        List<OrderBean> ret = new ArrayList<>();
+        Cursor cursor = conn.rawQuery("select * from orders where u_id=? and o_status=? " +
+                        "order by strftime('%Y-%m-%d %H:%M:%S', o_time) desc",
+                new String[]{u_id, status});
+        while (cursor.moveToNext()) {
+            ret.add(new OrderBean(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getInt(2),
+                    cursor.getInt(3),
+                    cursor.getInt(4),
+                    cursor.getInt(5)
+            ));
+        }
+        return ret;
+    }
+
+    /**
      * 查看o_id所有订单详情
      */
     public static List<OrderDetailBean> getOrderDetailsByOid(String o_id) {

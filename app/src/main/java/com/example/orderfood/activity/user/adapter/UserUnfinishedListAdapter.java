@@ -10,17 +10,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderfood.Bean.FoodBean;
+import com.example.orderfood.Bean.OrderBean;
+import com.example.orderfood.Bean.OrderDetailBean;
 import com.example.orderfood.Bean.ShopBean;
+import com.example.orderfood.Bean.UserBean;
+import com.example.orderfood.Bean.UserInfoBean;
 import com.example.orderfood.DAO.CommentDAO;
 import com.example.orderfood.DAO.FoodDAO;
+import com.example.orderfood.DAO.OrderDAO;
 import com.example.orderfood.DAO.ShopDAO;
+import com.example.orderfood.DAO.UserDAO;
+import com.example.orderfood.DAO.UserInfoDAO;
 import com.example.orderfood.R;
+import com.example.orderfood.activity.shop.adapter.UnfinishOrderDetailListAdapter;
 import com.example.orderfood.activity.user.foodAct.ManageUserBuyActivity;
 
 import java.util.List;
@@ -28,12 +40,12 @@ import java.util.List;
 /**
  * 显示商家商品列表
  */
-public class UserUnfinishedListAdapter extends ArrayAdapter<FoodBean> {
+public class UserUnfinishedListAdapter extends ArrayAdapter<OrderBean> {
 
-    private List<FoodBean> list;
+    private List<OrderBean> list;
     private Context context;
 
-    public UserUnfinishedListAdapter(@NonNull Context context, List<FoodBean> list) {
+    public UserUnfinishedListAdapter(@NonNull Context context, List<OrderBean> list) {
         super(context, R.layout.list_user_home_food, list);
         this.context = context;
         this.list = list;
@@ -43,44 +55,76 @@ public class UserUnfinishedListAdapter extends ArrayAdapter<FoodBean> {
     public View getView(int position, View convertView, ViewGroup viewGroup) {
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.list_user_home_food, viewGroup, false);
+            convertView = inflater.inflate(R.layout.list_manage_user_unfinish_order, viewGroup, false);
         }
-        SharedPreferences sharedPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE);
-        String u_id = sharedPreferences.getString("u_id", "1");
-        FoodBean food = list.get(position);
-        ShopBean shopBean = ShopDAO.getShopInfoBySid(""+food.getS_id());
+        OrderBean order = list.get(position);
+        UserInfoBean userInfo = UserInfoDAO.getUserInfoByIid(""+order.getI_id());
+//        UserBean user = UserDAO.getUserInfoByUid(""+order.getU_id());
+        ShopBean shop = ShopDAO.getShopInfoBySid(""+order.getS_id());
 
-        // 商品信息
-        ImageView imageView = convertView.findViewById(R.id.user_food_list_foodImg);
-        TextView nameText = convertView.findViewById(R.id.user_food_list_foodName);
-        TextView saleText = convertView.findViewById(R.id.user_food_list_foodSale);
-        TextView priceText = convertView.findViewById(R.id.user_food_list_foodPrice);
-        TextView descText = convertView.findViewById(R.id.user_food_list_foodDesc);
+        // 加载订单信息
+        ImageView imageView = convertView.findViewById(R.id.user_unfinish_order_shop_img);
+        imageView.setImageBitmap(BitmapFactory.decodeFile(shop.getS_img()));
+        TextView oidText = convertView.findViewById(R.id.user_unfinish_order_id);
+        oidText.setText("订单编号："+order.getO_id());
+        TextView timeText = convertView.findViewById(R.id.user_unfinish_order_time);
+        timeText.setText(order.getO_time());
+        TextView nameText = convertView.findViewById(R.id.user_unfinish_order_receive_name);
+        nameText.setText(userInfo.getIName());
+        TextView addrText = convertView.findViewById(R.id.user_unfinish_order_receive_addr);
+        addrText.setText(userInfo.getIAddr());
+        TextView telText = convertView.findViewById(R.id.user_unfinish_order_receive_tel);
+        telText.setText(userInfo.getITel());
 
-        Bitmap bitmap = BitmapFactory.decodeFile(food.getF_img());
-        imageView.setImageBitmap(bitmap);
-        nameText.setText(food.getF_name());
-        saleText.setText("月销售：" + FoodDAO.getMonthSale(""+food.getF_id(), ""+shopBean.getS_id()));
-        priceText.setText("价格：" + food.getF_price());
-        descText.setText(food.getF_desc());
+        // 加载订单详细信息
+        RecyclerView detailList = convertView.findViewById(R.id.user_unfinish_order_detail_list);
+        detailList.setLayoutManager(new LinearLayoutManager(getContext()));
+        List<OrderDetailBean> detailBeans = OrderDAO.getOrderDetailsByOid(""+order.getO_id());
+        UnfinishOrderDetailListAdapter detailListAdapter = new UnfinishOrderDetailListAdapter(detailBeans);
+        if (detailBeans.isEmpty()) {
+            detailList.setAdapter(null);
+        } else {
+            detailList.setAdapter(detailListAdapter);
+        }
+        detailListAdapter.notifyDataSetChanged();
 
-        // 店铺信息
-        ImageView sImgView = convertView.findViewById(R.id.user_food_list_shopImg);
-        Log.d("user", shopBean.getS_img());
-        sImgView.setImageBitmap(BitmapFactory.decodeFile(shopBean.getS_img()));
-        TextView sNameView = convertView.findViewById(R.id.user_food_list_shopName);
-        sNameView.setText(shopBean.getS_name());
-        // 计算分数
-        TextView scoreView = convertView.findViewById(R.id.user_food_list_score);
-        scoreView.setText(CommentDAO.getAvgScoreBySid(""+shopBean.getS_id())+"分");
+        // 计算总价
+        float totPrice = 0.0f;
+        for (OrderDetailBean detailBean : detailBeans) {
+            totPrice += detailBean.getF_price() * detailBean.getO_num();
+        }
+        TextView totPriceView = convertView.findViewById(R.id.user_unfinish_order_list_totprice);
+        totPriceView.setText("￥ "+totPrice);
 
-
-        convertView.setOnClickListener(new View.OnClickListener() {
+        // 取消订单
+        Button cancelButton = convertView.findViewById(R.id.user_unfinish_order_list_cancel_but);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ManageUserBuyActivity.class);
-                intent.putExtra("shop", shopBean);
-                getContext().startActivity(intent);
+                int res = OrderDAO.updateOrderStatus(""+order.getO_id(), "2");
+                if (res == 0) {
+                    list.remove(position);
+                    notifyDataSetChanged();
+                    Toast.makeText(getContext(), "取消成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "取消失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // 完成订单
+        Button finishButton = convertView.findViewById(R.id.user_unfinish_order_list_finish_but);
+        finishButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int res = OrderDAO.updateOrderStatus(""+order.getO_id(), "3");
+                if (res == 0) {
+                    list.remove(position);
+                    notifyDataSetChanged();
+                    Toast.makeText(getContext(), "完成成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "完成失败", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
