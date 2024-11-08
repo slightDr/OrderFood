@@ -57,4 +57,13 @@ public class UserDAO {
         }
         return null;
     }
+
+    public static int delUserByUid(String uId) {
+        try {
+            conn.execSQL("delete from users where u_id=?", new String[]{uId});
+            return 0;
+        } catch (Exception e) {
+            return 1;
+        }
+    }
 }

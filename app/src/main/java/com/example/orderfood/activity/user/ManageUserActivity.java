@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.orderfood.R;
 import com.example.orderfood.activity.user.fragment.ManageUserHomeFragment;
+import com.example.orderfood.activity.user.fragment.ManageUserMyFragment;
 import com.example.orderfood.activity.user.fragment.ManageUserUnfinishedFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -61,7 +62,7 @@ public class ManageUserActivity extends AppCompatActivity {
                 } else if (id == R.id.user_bottom_navi_waiting) {
                     fragmentTransaction.replace(R.id.manage_user_frame, new ManageUserUnfinishedFragment());
                 } else {
-                    fragmentTransaction.replace(R.id.manage_user_frame, new ManageUserHomeFragment());
+                    fragmentTransaction.replace(R.id.manage_user_frame, new ManageUserMyFragment());
                 }
                 fragmentTransaction.commit();
 
