@@ -16,6 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.orderfood.DAO.ShopDAO;
+import com.example.orderfood.DAO.UserDAO;
 import com.example.orderfood.R;
 
 public class ManageUserUpdatePwdActivity extends AppCompatActivity {
@@ -24,7 +25,7 @@ public class ManageUserUpdatePwdActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_manage_shop_update_pwd);
+        setContentView(R.layout.activity_manage_user_update_pwd);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -32,7 +33,7 @@ public class ManageUserUpdatePwdActivity extends AppCompatActivity {
         });
 
         // 实现返回功能
-        Toolbar toolbar = findViewById(R.id.manage_shop_update_pwd_toolbar);
+        Toolbar toolbar = findViewById(R.id.manage_user_update_pwd_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,12 +45,12 @@ public class ManageUserUpdatePwdActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = ManageUserUpdatePwdActivity.this
                 .getSharedPreferences("data", Context.MODE_PRIVATE);
-        String s_id = sharedPreferences.getString("s_id", "");
+        String u_id = sharedPreferences.getString("u_id", "1");
 
-        EditText pwdText = findViewById(R.id.manage_shop_update_pwd);
-        EditText repwdText = findViewById(R.id.manage_shop_update_repwd);
+        EditText pwdText = findViewById(R.id.manage_user_update_pwd);
+        EditText repwdText = findViewById(R.id.manage_user_update_repwd);
 
-        Button button = findViewById(R.id.manage_shop_update_pwd_button);
+        Button button = findViewById(R.id.manage_user_update_pwd_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,7 +63,7 @@ public class ManageUserUpdatePwdActivity extends AppCompatActivity {
                     return;
                 }
 
-                int res = ShopDAO.updateShopPwd(s_id, pwd);
+                int res = UserDAO.updateUserPwd(u_id, pwd);
                 if (res == 0) {
                     Toast.makeText(ManageUserUpdatePwdActivity.this, "修改密码成功", Toast.LENGTH_SHORT).show();
                     pwdText.setText("");

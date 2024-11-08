@@ -66,4 +66,14 @@ public class UserDAO {
             return 1;
         }
     }
+
+    public static int updateUserPwd(String uId, String pwd) {
+        String data[] = new String[]{pwd, uId};
+        try {
+            conn.execSQL("update users set u_pwd=? where u_id=?", data);
+            return 0;
+        } catch (Exception e) {
+            return 1;
+        }
+    }
 }

@@ -34,6 +34,7 @@ import com.example.orderfood.activity.shop.ManageShopManageCommentActivity;
 import com.example.orderfood.activity.shop.ManageShopShowFinishedOrderActivity;
 import com.example.orderfood.activity.shop.ManageShopUpdateInfoActivity;
 import com.example.orderfood.activity.shop.ManageShopUpdatePwdActivity;
+import com.example.orderfood.activity.user.infoAct.ManageUserUpdatePwdActivity;
 
 public class ManageUserMyFragment extends Fragment {
 
@@ -109,7 +110,7 @@ public class ManageUserMyFragment extends Fragment {
         changePwdText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ManageShopUpdatePwdActivity.class);
+                Intent intent = new Intent(getActivity(), ManageUserUpdatePwdActivity.class);
                 startActivity(intent);
             }
         });
