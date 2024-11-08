@@ -101,7 +101,11 @@ public class UserBuyShopCommentListAdapter extends ArrayAdapter<CommentBean> {
         TextView contentText = convertView.findViewById(R.id.user_buy_comment_content);
         contentText.setText(commentBean.getCommentContent());
         ImageView commentImageView = convertView.findViewById(R.id.user_buy_comment_img);
-        commentImageView.setImageBitmap(BitmapFactory.decodeFile(commentBean.getCommentImg()));
+        if (commentBean.getCommentImg().isEmpty()) {
+            commentImageView.setVisibility(View.GONE);
+        } else {
+            commentImageView.setImageBitmap(BitmapFactory.decodeFile(commentBean.getCommentImg()));
+        }
 
         return convertView;
     }

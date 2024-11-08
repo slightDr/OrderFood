@@ -58,12 +58,42 @@
 
     </RelativeLayout>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/user_buy_tab"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicatorColor="@color/themeBlue"
-        app:tabIndicatorHeight="4dp"/>
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/user_buy_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:tabIndicatorColor="@color/themeBlue"
+                app:tabIndicatorHeight="4dp"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/manage_user_buy_comment_but"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_round"
+            android:text="发表评论"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/user_buy_tab"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:tabIndicatorColor="@color/themeBlue"-->
+<!--        app:tabIndicatorHeight="4dp"/>-->
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/user_buy_pager"

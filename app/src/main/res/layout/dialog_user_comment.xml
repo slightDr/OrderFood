@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/user_comment_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入评论内容"
+        android:inputType="textMultiLine"
+        android:minLines="5"
+        android:maxLines="5"
+        android:gravity="top"
+        android:scrollbars="vertical"
+        android:background="@android:drawable/edit_text"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/user_comment_star_1"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:src="@drawable/yellow_star"
+            android:layout_marginLeft="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/user_comment_star_2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:src="@drawable/yellow_star"
+            android:layout_marginLeft="5dp"
+            />
+
+        <ImageView
+            android:id="@+id/user_comment_star_3"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:src="@drawable/yellow_star"
+            android:layout_marginLeft="5dp"
+            />
+
+        <ImageView
+            android:id="@+id/user_comment_star_4"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:src="@drawable/yellow_star"
+            android:layout_marginLeft="5dp"
+            />
+
+        <ImageView
+            android:id="@+id/user_comment_star_5"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:src="@drawable/yellow_star"
+            android:layout_marginLeft="5dp"
+            />
+
+        <TextView
+            android:id="@+id/user_comment_score_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="非常满意"
+            android:layout_marginLeft="5dp"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/user_comment_upload_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/upload_img"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/user_comment_but"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发表"
+        android:textColor="@color/white"
+        android:background="@drawable/button_round"
+        android:layout_gravity="right"/>
+
+</LinearLayout>

@@ -39,4 +39,14 @@ public class CommentDAO {
         }
         return 0;
     }
+
+    public static int insertComment(String u_id, String s_id, String time, String content, String score, String img) {
+        try {
+            conn.execSQL("insert into comments values(?,?,?,?,?,?,?)",
+                    new String[]{null, u_id, s_id, time, content, score, img});
+            return 0;
+        } catch (Exception e) {
+            return 1;
+        }
+    }
 }
