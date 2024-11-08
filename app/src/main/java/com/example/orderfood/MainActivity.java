@@ -19,7 +19,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.orderfood.DAO.ShopDAO;
 import com.example.orderfood.DAO.UserDAO;
 import com.example.orderfood.activity.shop.ManageShopActivity;
-import com.example.orderfood.activity.shop.ManageShopShowFinishedOrderActivity;
 import com.example.orderfood.activity.shop.RegisterShopActivity;
 import com.example.orderfood.activity.user.ManageUserActivity;
 import com.example.orderfood.activity.user.RegisterUserActivity;

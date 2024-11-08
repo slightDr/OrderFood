@@ -48,7 +48,7 @@ public class UnfinishOrderDetailListAdapter extends RecyclerView.Adapter<Unfinis
         holder.nameText.setText(orderDetail.getF_name());
         holder.numText.setText(orderDetail.getO_num()+"份");
         holder.priceText.setText(
-                "￥ "+orderDetail.getF_price()*orderDetail.getO_num()
+                "￥ "+Math.round(orderDetail.getF_price()*orderDetail.getO_num()*100.0)/100.0
         );
     }
 

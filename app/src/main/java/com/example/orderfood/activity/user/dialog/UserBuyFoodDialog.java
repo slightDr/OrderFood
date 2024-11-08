@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +17,7 @@ import com.example.orderfood.Bean.FoodBean;
 import com.example.orderfood.Bean.UserBean;
 import com.example.orderfood.Bean.UserInfoBean;
 import com.example.orderfood.DAO.FoodDAO;
+import com.example.orderfood.DAO.OrderDAO;
 import com.example.orderfood.DAO.UserDAO;
 import com.example.orderfood.DAO.UserInfoDAO;
 import com.example.orderfood.R;
@@ -40,14 +43,12 @@ public class UserBuyFoodDialog {
     private ManageUserBuyActivity activity;
     private String s_id;
     private JSONObject foodJson;
-    private String totalPrice;
 
-    public UserBuyFoodDialog(Context context, String s_id, JSONObject foodJson, String totalPrice) {
+    public UserBuyFoodDialog(Context context, String s_id, JSONObject foodJson) {
         this.activity = (ManageUserBuyActivity) context;
         this.context = context;
         this.s_id = s_id;
         this.foodJson = foodJson;
-        this.totalPrice = totalPrice;
         init();
     }
 
@@ -73,12 +74,12 @@ public class UserBuyFoodDialog {
         dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
         String format = dateFormat.format(date);
         timeText.setText(format);
-        TextView recieveNameText = buyDialog.findViewById(R.id.buy_user_recieve_name);
-        recieveNameText.setText("");
-        TextView addrText = buyDialog.findViewById(R.id.buy_user_recieve_addr);
-        addrText.setText("");
-        TextView telText = buyDialog.findViewById(R.id.buy_user_recieve_tel);
-        telText.setText("");
+        TextView receiveNameText = buyDialog.findViewById(R.id.buy_user_receive_name);
+        receiveNameText.setText("");
+        TextView receiveaddrText = buyDialog.findViewById(R.id.buy_user_receive_addr);
+        receiveaddrText.setText("");
+        TextView receivetelText = buyDialog.findViewById(R.id.buy_user_receive_tel);
+        receivetelText.setText("");
 
         // 收货信息
         RecyclerView infoListView = buyDialog.findViewById(R.id.buy_user_info_list);
@@ -87,7 +88,7 @@ public class UserBuyFoodDialog {
         if (userInfoList.isEmpty()) {
             infoListView.setAdapter(null);
         } else {
-            infoListView.setAdapter(new UserInfolListAdapter(userInfoList));
+            infoListView.setAdapter(new UserInfolListAdapter(buyDialog, userInfoList));
         }
 
         // 订单商品信息
@@ -114,8 +115,48 @@ public class UserBuyFoodDialog {
         }
 
         // 显示总价
-        TextView priceView = buyDialog.findViewById(R.id.buy_order_totprice);
-        priceView.setText(totalPrice);
+        TextView priceView = activity.findViewById(R.id.user_buy_shop_food_total_price);
+        TextView currPriceView = buyDialog.findViewById(R.id.buy_order_totprice);
+        currPriceView.setText(priceView.getText().toString());
+
+        // 取消支付
+        Button cancelButton = buyDialog.findViewById(R.id.buy_order_cancel_pay_but);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog.cancel();
+            }
+        });
+
+        // 支付
+        Button payButton = buyDialog.findViewById(R.id.buy_order_pay_but);
+        payButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView iIdText = buyDialog.findViewById(R.id.chosen_i_id);
+                String iId = iIdText.getText().toString();
+                if (iId.isEmpty()) {
+                    Toast.makeText(context, "请选择收货信息", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String time = timeText.getText().toString();
+                // 插入订单
+                int o_id = OrderDAO.insertOrder(time, s_id, u_id, "1", iId);
+                if (o_id == -1) {
+                    Toast.makeText(context, "下单失败", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                // 插入详情
+                for (int i = 0; i < foods.size(); ++ i) {
+                    FoodBean food = foods.get(i);
+                    int num = nums.get(i);
+                    OrderDAO.insertOrderDetail(""+o_id, ""+food.getF_id(), food.getF_name(),
+                           food.getF_desc(), ""+food.getF_price(), food.getF_img(), ""+num);
+                }
+                Toast.makeText(context, "下单成功", Toast.LENGTH_SHORT).show();
+                bottomSheetDialog.cancel();
+            }
+        });
     }
 
 }

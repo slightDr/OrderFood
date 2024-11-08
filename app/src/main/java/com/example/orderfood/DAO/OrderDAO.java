@@ -113,4 +113,36 @@ public class OrderDAO {
         }
         return ret;
     }
+
+    /**
+     * 增加订单
+     */
+    public static int insertOrder(String o_time, String s_id, String u_id, String o_status, String i_id) {
+//        Log.d("insert order", o_time+s_id+u_id+o_status+i_id);
+        try {
+            conn.execSQL("insert into orders values(?,?,?,?,?,?)",
+                    new String[]{null, o_time, s_id, u_id, o_status, i_id});
+            // 获取自增字段的值
+            Cursor cursor = conn.rawQuery("SELECT last_insert_rowid()", null);
+            if (cursor.moveToFirst()) {
+                return cursor.getInt(0);
+            }
+            return -1;
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    /**
+     * 增加订单详情
+     */
+    public static int insertOrderDetail(String o_id, String f_id, String f_name, String f_desc, String f_price, String f_img, String o_num) {
+        try {
+            conn.execSQL("insert into order_details values(?,?,?,?,?,?,?,?)",
+                    new String[]{null, o_id, f_id, f_name, f_desc, f_price, f_img, o_num});
+            return 0;
+        } catch (Exception e) {
+            return 1;
+        }
+    }
 }

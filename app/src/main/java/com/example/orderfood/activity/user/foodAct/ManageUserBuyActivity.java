@@ -141,8 +141,7 @@ public class ManageUserBuyActivity extends AppCompatActivity {
                     return;
                 }
                 UserBuyFoodDialog userBuyFoodDialog = new UserBuyFoodDialog(ManageUserBuyActivity.this,
-                        ""+shop.getS_id(), foodJson, priceView.getText().toString());
-                Log.d("user", foodJson.toString());
+                        ""+shop.getS_id(), foodJson);
             }
         });
     }

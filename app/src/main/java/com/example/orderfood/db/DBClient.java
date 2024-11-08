@@ -15,7 +15,7 @@ import com.example.orderfood.util.FileImgUtil;
  */
 public class DBClient extends SQLiteOpenHelper {
 
-    private static final int ver = 23;  // 版本号，每次更改表结构都需要+1，否则不生效
+    private static final int ver = 24;  // 版本号，每次更改表结构都需要+1，否则不生效
     private static final String dbName = "db_orderfood.db";  // 数据库名称
     private Context context;
 

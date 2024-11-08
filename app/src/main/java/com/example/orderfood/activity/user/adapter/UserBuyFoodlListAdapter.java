@@ -45,7 +45,7 @@ public class UserBuyFoodlListAdapter extends RecyclerView.Adapter<UserBuyFoodlLi
         holder.nameText.setText(food.getF_name());
         holder.numText.setText(num+"份");
         holder.priceText.setText(
-                "￥ " + num * food.getF_price()
+                "￥ " + Math.round(num * food.getF_price() * 100.0) / 100.0
         );
     }
 
