@@ -127,7 +127,7 @@ public class ManageUserMyFragment extends Fragment {
             }
         });
 
-//        /** 订单管理 */
+//        /** 收货信息管理 */
 //        Button manageOrderButton = rootView.findViewById(R.id.manage_shop_my_manage_order);
 //        manageOrderButton.setOnClickListener(new View.OnClickListener() {
 //            @Override

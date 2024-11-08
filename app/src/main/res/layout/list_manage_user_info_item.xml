@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/info_round"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/manage_user_info_addr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="user addr addr addr"
+        android:layout_marginBottom="5dp"
+        android:textSize="20sp"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/manage_user_info_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="user name"
+        android:layout_marginBottom="5dp"
+        android:textSize="15sp"
+        android:layout_below="@+id/manage_user_info_addr"
+        android:layout_marginLeft="10dp"
+        />
+
+    <TextView
+        android:id="@+id/manage_user_info_tel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="user tel"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="15sp"
+        android:layout_toRightOf="@+id/manage_user_info_name"
+        android:layout_below="@+id/manage_user_info_addr"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="57dp"
+        android:layout_toRightOf="@+id/manage_user_info_addr"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+
+        <ImageView
+            android:id="@+id/manage_user_info_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/update_info"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

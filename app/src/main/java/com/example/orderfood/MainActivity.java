@@ -22,6 +22,7 @@ import com.example.orderfood.activity.shop.ManageShopActivity;
 import com.example.orderfood.activity.shop.RegisterShopActivity;
 import com.example.orderfood.activity.user.ManageUserActivity;
 import com.example.orderfood.activity.user.RegisterUserActivity;
+import com.example.orderfood.activity.user.infoAct.ManageUserInfoActivity;
 import com.example.orderfood.db.DBClient;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         /** 调试用 */
-        Intent intent = new Intent(MainActivity.this, ManageUserActivity.class);
+        Intent intent = new Intent(MainActivity.this, ManageUserInfoActivity.class);
         startActivity(intent);
 
         // 登陆界面单选默认选择商家
