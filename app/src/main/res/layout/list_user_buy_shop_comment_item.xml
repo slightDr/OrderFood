@@ -1,6 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/user_buy_comment_user_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/upload_img"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:id="@+id/user_buy_comment_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:text="test user"
+            android:layout_toRightOf="@id/user_buy_comment_user_img"
+            android:gravity="center_vertical|center_horizontal"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/user_buy_comment_time"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:text="2024-10-10 10:10:10"
+            android:layout_toRightOf="@id/user_buy_comment_user_img"
+            android:gravity="left|center_vertical|center_horizontal"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@id/user_buy_comment_user_name"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/user_buy_comment_star_1"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:src="@drawable/yellow_star"
+            android:layout_marginLeft="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/user_buy_comment_star_2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:src="@drawable/yellow_star"
+            android:layout_marginLeft="5dp"
+            />
+
+        <ImageView
+            android:id="@+id/user_buy_comment_star_3"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:src="@drawable/yellow_star"
+            android:layout_marginLeft="5dp"
+            />
+
+        <ImageView
+            android:id="@+id/user_buy_comment_star_4"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:src="@drawable/yellow_star"
+            android:layout_marginLeft="5dp"
+            />
+
+        <ImageView
+            android:id="@+id/user_buy_comment_star_5"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:src="@drawable/white_star"
+            android:layout_marginLeft="5dp"
+            />
+
+        <TextView
+            android:id="@+id/user_buy_comment_score_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="非常满意"
+            android:layout_marginLeft="5dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/user_buy_comment_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="comment"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <ImageView
+            android:id="@+id/user_buy_comment_img"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/upload_img"
+            android:layout_marginTop="5dp"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/slight_gray"/>
+
+</LinearLayout>

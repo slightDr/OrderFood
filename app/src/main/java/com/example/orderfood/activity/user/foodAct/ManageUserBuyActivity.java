@@ -68,6 +68,7 @@ public class ManageUserBuyActivity extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
+        String state = intent.getStringExtra("state");
         ShopBean shop = (ShopBean)intent.getSerializableExtra("shop");
 
         // 实现返回功能
@@ -118,6 +119,9 @@ public class ManageUserBuyActivity extends AppCompatActivity {
                 tab.setText("评论");
             }
         })).attach();
+        if ("comment".equals(state)) {
+            viewPager.setCurrentItem(1);
+        }
 
         // 点击结算按钮
         Button buyButton = findViewById(R.id.user_buy_shop_food_button);

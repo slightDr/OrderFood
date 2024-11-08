@@ -1,11 +1,13 @@
 package com.example.orderfood.activity.user.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +26,7 @@ import com.example.orderfood.DAO.UserDAO;
 import com.example.orderfood.DAO.UserInfoDAO;
 import com.example.orderfood.R;
 import com.example.orderfood.activity.shop.adapter.FinishedOrderDetailListAdapter;
+import com.example.orderfood.activity.user.foodAct.ManageUserBuyActivity;
 
 import java.util.List;
 
@@ -91,10 +94,18 @@ public class UserFinishedOrderListAdapter extends ArrayAdapter<OrderBean> {
         TextView totPriceView = convertView.findViewById(R.id.user_finished_order_list_totprice);
         totPriceView.setText("￥ "+totPrice);
 
-        return convertView;
-
         // 评论按钮
-
+        Button commentBut = convertView.findViewById(R.id.finished_order_comment_but);
+        commentBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ManageUserBuyActivity.class);
+                intent.putExtra("state", "comment");
+                intent.putExtra("shop", shop);
+                context.startActivity(intent);
+            }
+        });
+        return convertView;
     }
 
 
