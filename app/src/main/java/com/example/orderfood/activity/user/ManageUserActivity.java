@@ -44,7 +44,7 @@ public class ManageUserActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.manage_user_frame, new ManageUserHomeFragment());
             fragmentTransaction.commit();
         } else {
-            fragmentTransaction.replace(R.id.manage_user_frame, new ManageUserHomeFragment());
+            fragmentTransaction.replace(R.id.manage_user_frame, new ManageUserMyFragment());
             fragmentTransaction.commit();
         }
 

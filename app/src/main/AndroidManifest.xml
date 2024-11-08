@@ -43,6 +43,9 @@
             android:name=".activity.user.infoAct.ManageUserUpdatePwdActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.user.infoAct.ManageUserUpdateInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.user.RegisterUserActivity"
             android:exported="false" />
         <activity

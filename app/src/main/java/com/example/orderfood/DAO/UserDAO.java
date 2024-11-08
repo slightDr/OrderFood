@@ -76,4 +76,14 @@ public class UserDAO {
             return 1;
         }
     }
+
+    public static int updateUser(String uId, String name, String sex, String picPath) {
+        try {
+            conn.execSQL("update users set u_name=?, u_sex=?, u_img=? where u_id=?",
+                    new String[]{name, sex, picPath, uId});
+            return 0;
+        } catch (Exception e) {
+            return 1;
+        }
+    }
 }

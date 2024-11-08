@@ -34,6 +34,7 @@ import com.example.orderfood.activity.shop.ManageShopManageCommentActivity;
 import com.example.orderfood.activity.shop.ManageShopShowFinishedOrderActivity;
 import com.example.orderfood.activity.shop.ManageShopUpdateInfoActivity;
 import com.example.orderfood.activity.shop.ManageShopUpdatePwdActivity;
+import com.example.orderfood.activity.user.infoAct.ManageUserUpdateInfoActivity;
 import com.example.orderfood.activity.user.infoAct.ManageUserUpdatePwdActivity;
 
 public class ManageUserMyFragment extends Fragment {
@@ -114,7 +115,17 @@ public class ManageUserMyFragment extends Fragment {
                 startActivity(intent);
             }
         });
-//
+
+        /** 修改个人信息功能 */
+        TextView editInfoText = rootView.findViewById(R.id.mange_user_edit_info);
+        editInfoText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ManageUserUpdateInfoActivity.class);
+                startActivity(intent);
+            }
+        });
+
 //        /** 订单管理 */
 //        Button manageOrderButton = rootView.findViewById(R.id.manage_shop_my_manage_order);
 //        manageOrderButton.setOnClickListener(new View.OnClickListener() {
