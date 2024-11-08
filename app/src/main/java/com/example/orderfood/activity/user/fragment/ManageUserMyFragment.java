@@ -34,6 +34,7 @@ import com.example.orderfood.activity.shop.ManageShopManageCommentActivity;
 import com.example.orderfood.activity.shop.ManageShopShowFinishedOrderActivity;
 import com.example.orderfood.activity.shop.ManageShopUpdateInfoActivity;
 import com.example.orderfood.activity.shop.ManageShopUpdatePwdActivity;
+import com.example.orderfood.activity.user.infoAct.ManageUserShowFinishedOrderActivity;
 import com.example.orderfood.activity.user.infoAct.ManageUserUpdateInfoActivity;
 import com.example.orderfood.activity.user.infoAct.ManageUserUpdatePwdActivity;
 
@@ -136,15 +137,15 @@ public class ManageUserMyFragment extends Fragment {
 //            }
 //        });
 //
-//        /** 完成订单 */
-//        Button finishedOrderButton = rootView.findViewById(R.id.manage_shop_my_manage_finished_order);
-//        finishedOrderButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), ManageShopShowFinishedOrderActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        /** 完成订单 */
+        TextView finishedOrderButton = rootView.findViewById(R.id.mange_user_finished_order);
+        finishedOrderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ManageUserShowFinishedOrderActivity.class);
+                startActivity(intent);
+            }
+        });
 //
 //        /** 评论管理 */
 //        Button manageCommentButton = rootView.findViewById(R.id.manage_shop_my_manage_comment);

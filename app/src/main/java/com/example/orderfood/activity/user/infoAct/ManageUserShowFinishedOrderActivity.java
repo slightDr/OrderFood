@@ -1,10 +1,11 @@
-package com.example.orderfood.activity.shop;
+package com.example.orderfood.activity.user.infoAct;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.RadioButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,34 +18,34 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.orderfood.Bean.OrderBean;
 import com.example.orderfood.DAO.OrderDAO;
 import com.example.orderfood.R;
-import com.example.orderfood.activity.shop.adapter.FinishedOrderListAdapter;
-import com.example.orderfood.activity.shop.adapter.UnfinishOrderListAdapter;
+import com.example.orderfood.activity.user.adapter.UserFinishedOrderListAdapter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-public class ManageShopShowFinishedOrderActivity extends AppCompatActivity {
+public class ManageUserShowFinishedOrderActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_manage_shop_show_finished_order);
+        setContentView(R.layout.activity_manage_user_show_finished_order);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        SharedPreferences shared = ManageShopShowFinishedOrderActivity.this.getSharedPreferences("data", Context.MODE_PRIVATE);
-        String s_id = shared.getString("s_id", "");
+        SharedPreferences shared = ManageUserShowFinishedOrderActivity.this.getSharedPreferences("data", Context.MODE_PRIVATE);
+        String u_id = shared.getString("u_id", "1");
 
         // 实现返回功能
-        Toolbar toolbar = findViewById(R.id.manage_shop_finished_order_toolbar);
+        Toolbar toolbar = findViewById(R.id.manage_user_finished_order_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,9 +56,9 @@ public class ManageShopShowFinishedOrderActivity extends AppCompatActivity {
         });
 
         // 列出订单
-        ListView listView = findViewById(R.id.manage_shop_finished_order_listview);
-        List<OrderBean> allOrders = OrderDAO.getAllOrdersBySidStatus(s_id, "2");  // 未完成订单
-        allOrders.addAll(OrderDAO.getAllOrdersBySidStatus(s_id, "3"));
+        ListView listView = findViewById(R.id.manage_user_finished_order_listview);
+        List<OrderBean> allOrders = OrderDAO.getAllOrdersByUidStatus(u_id, "2");
+        allOrders.addAll(OrderDAO.getAllOrdersByUidStatus(u_id, "3"));
         // 按照 o_time 排序
         Collections.sort(allOrders, new Comparator<OrderBean>() {
             @Override
@@ -76,11 +77,11 @@ public class ManageShopShowFinishedOrderActivity extends AppCompatActivity {
         if (allOrders.isEmpty()) {
             listView.setAdapter(null);
         } else {
-            listView.setAdapter(new FinishedOrderListAdapter(this, allOrders));
+            listView.setAdapter(new UserFinishedOrderListAdapter(this, allOrders));
         }
 
         // 搜索订单功能
-        SearchView searchView = findViewById(R.id.manage_shop_finished_order_search);
+        SearchView searchView = findViewById(R.id.manage_user_finished_order_search);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -89,7 +90,7 @@ public class ManageShopShowFinishedOrderActivity extends AppCompatActivity {
                 if (orders.isEmpty()) {
                     listView.setAdapter(null);
                 } else {
-                    listView.setAdapter(new UnfinishOrderListAdapter(ManageShopShowFinishedOrderActivity.this, orders));
+                    listView.setAdapter(new UserFinishedOrderListAdapter(ManageUserShowFinishedOrderActivity.this, orders));
                 }
                 return true;
             }
@@ -101,7 +102,7 @@ public class ManageShopShowFinishedOrderActivity extends AppCompatActivity {
                 if (orders.isEmpty()) {
                     listView.setAdapter(null);
                 } else {
-                    listView.setAdapter(new UnfinishOrderListAdapter(ManageShopShowFinishedOrderActivity.this, orders));
+                    listView.setAdapter(new UserFinishedOrderListAdapter(ManageUserShowFinishedOrderActivity.this, orders));
                 }
                 return true;
             }

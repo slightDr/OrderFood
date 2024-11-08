@@ -2,18 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.user.fragment.ManageUserUnfinishedFragment">
+    tools:context=".activity.user.infoAct.ManageUserShowFinishedOrderActivity">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/manage_user_finished_order_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:navigationIcon="@drawable/back"
         android:background="@color/themeBlue">
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/manage_user_unfinished_search"
+            android:id="@+id/manage_user_finished_order_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:iconifiedByDefault="false"
@@ -23,13 +26,13 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:background="@drawable/search_editor"
-            app:queryHint="搜索订单号或者联系方式"
+            app:queryHint="请输入订单号或用户联系方式"
             />
 
     </androidx.appcompat.widget.Toolbar>
 
     <ListView
-        android:id="@+id/user_unfinished_listview"
+        android:id="@+id/manage_user_finished_order_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:dividerHeight="10dp"
