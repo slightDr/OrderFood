@@ -1,11 +1,14 @@
 package com.example.orderfood.activity.user.infoAct;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
@@ -55,7 +58,15 @@ public class ManageUserInfoActivity extends AppCompatActivity {
         if (userInfos.isEmpty()) {
             userInfoList.setAdapter(null);
         } else {
-            userInfoList.setAdapter(new ManageUserInfolListAdapter(userInfos));
+            userInfoList.setAdapter(new ManageUserInfolListAdapter(this, userInfos));
         }
     }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 1 && resultCode == RESULT_OK) {
+//            Log.d("userInfo", data.getStringExtra("user_info_name"));
+//        }
+//    }
 }

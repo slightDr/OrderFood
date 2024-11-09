@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.user.infoAct.ManageUserUpdateReceiveInfoActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/manage_user_update_receive_info_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="修改收货信息"
+        app:titleTextColor="@color/white"
+        android:background="@color/themeBlue"
+        app:navigationIcon="@drawable/back"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_gravity="center_horizontal|center_vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="收货地址"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:gravity="center_vertical"
+                android:layout_marginTop="50dp"
+                />
+
+            <EditText
+                android:id="@+id/manage_user_update_receive_info_addr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入收货地址"
+                android:inputType="textMultiLine"
+                android:minLines="2"
+                android:maxLines="2"
+                android:gravity="top"
+                android:scrollbars="vertical"
+                android:background="@android:drawable/edit_text"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="收货人昵称"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                />
+
+            <EditText
+                android:id="@+id/manage_user_update_receive_info_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入收货人昵称"
+                android:inputType="textMultiLine"
+                android:minLines="2"
+                android:maxLines="2"
+                android:gravity="top"
+                android:scrollbars="vertical"
+                android:background="@android:drawable/edit_text"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="收货人联系方式"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                />
+
+            <EditText
+                android:id="@+id/manage_user_update_receive_info_tel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入收货人联系方式"
+                />
+
+            <Button
+                android:id="@+id/manage_user_update_receive_info_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="修改信息"
+                android:textColor="#FFF"
+                android:background="@color/themeBlue"
+                android:foreground="?android:selectableItemBackground"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

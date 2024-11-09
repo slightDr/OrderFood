@@ -54,6 +54,14 @@
             android:layout_weight="2"/>
 
         <ImageView
+            android:id="@+id/manage_user_info_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/del_blue"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="20dp"/>
+
+        <ImageView
             android:id="@+id/manage_user_info_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

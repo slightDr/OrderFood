@@ -34,6 +34,7 @@ import com.example.orderfood.activity.shop.ManageShopManageCommentActivity;
 import com.example.orderfood.activity.shop.ManageShopShowFinishedOrderActivity;
 import com.example.orderfood.activity.shop.ManageShopUpdateInfoActivity;
 import com.example.orderfood.activity.shop.ManageShopUpdatePwdActivity;
+import com.example.orderfood.activity.user.infoAct.ManageUserInfoActivity;
 import com.example.orderfood.activity.user.infoAct.ManageUserShowFinishedOrderActivity;
 import com.example.orderfood.activity.user.infoAct.ManageUserUpdateInfoActivity;
 import com.example.orderfood.activity.user.infoAct.ManageUserUpdatePwdActivity;
@@ -127,15 +128,15 @@ public class ManageUserMyFragment extends Fragment {
             }
         });
 
-//        /** 收货信息管理 */
-//        Button manageOrderButton = rootView.findViewById(R.id.manage_shop_my_manage_order);
-//        manageOrderButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), ManageShopFinishOrderActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        /** 收货信息管理 */
+        TextView manageInfo = rootView.findViewById(R.id.mange_user_receive_info);
+        manageInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ManageUserInfoActivity.class);
+                startActivity(intent);
+            }
+        });
 //
         /** 完成订单 */
         TextView finishedOrderButton = rootView.findViewById(R.id.mange_user_finished_order);

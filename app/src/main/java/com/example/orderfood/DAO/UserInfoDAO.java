@@ -44,4 +44,23 @@ public class UserInfoDAO {
         return null;
     }
 
+    public static int setUserInfo(String id, String name, String addr, String tel) {
+        try {
+            conn.execSQL("update user_infos set i_name=?, i_addr=?, i_tel=? where i_id=?",
+                    new String[]{name, addr, tel, id});
+            return 0;
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    public static int delById(String i_id) {
+        try {
+            conn.execSQL("delete from user_infos where i_id=?",
+                    new String[]{i_id});
+            return 0;
+        } catch (Exception e) {
+            return -1;
+        }
+    }
 }
