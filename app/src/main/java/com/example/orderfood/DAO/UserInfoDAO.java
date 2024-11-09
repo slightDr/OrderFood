@@ -63,4 +63,14 @@ public class UserInfoDAO {
             return -1;
         }
     }
+
+    public static int addUserInfo(String uId, String name, String addr, String tel) {
+        try {
+            conn.execSQL("insert into user_infos values(?,?,?,?,?)",
+                    new String[]{null, uId, name, addr, tel});
+            return 0;
+        } catch (Exception e) {
+            return -1;
+        }
+    }
 }
