@@ -7,6 +7,7 @@ import android.util.Log;
 import com.example.orderfood.Bean.ShopBean;
 import com.example.orderfood.Bean.UserBean;
 import com.example.orderfood.db.DBClient;
+import com.example.orderfood.util.PasswordUtil;
 
 /**
  * 用户相关数据库操作
@@ -31,6 +32,7 @@ public class UserDAO {
     }
 
     public static int loginAsUser(String name, String pwd) {
+        pwd = PasswordUtil.hashPassword(pwd);
         String[] args = {name, pwd};
         String sql = "select * from users where u_name = ? and u_pwd = ? limit 1";
 

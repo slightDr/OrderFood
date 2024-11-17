@@ -31,6 +31,7 @@ import com.example.orderfood.DAO.UserDAO;
 import com.example.orderfood.R;
 import com.example.orderfood.activity.user.RegisterUserActivity;
 import com.example.orderfood.util.FileImgUtil;
+import com.example.orderfood.util.PasswordUtil;
 
 public class RegisterUserActivity extends AppCompatActivity {
     private ActivityResultLauncher<String> getContentLauncher;
@@ -147,6 +148,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                 // 保存到数据库
                 String picPath = FileImgUtil.getPicAbsPath(); // 获取保存图片的绝对路径
                 FileImgUtil.saveImageUriToFile(selectPicUri, RegisterUserActivity.this, picPath); // 保存图片
+                uPwd = PasswordUtil.hashPassword(uPwd);
                 int rtn = UserDAO.saveUser(uName, uPwd, uSex, uAddr, uTel, picPath);
                 if (rtn == 0) {
                     Toast.makeText(RegisterUserActivity.this, "注册成功", Toast.LENGTH_SHORT).show();

@@ -9,13 +9,14 @@ import androidx.annotation.Nullable;
 
 import com.example.orderfood.R;
 import com.example.orderfood.util.FileImgUtil;
+import com.example.orderfood.util.PasswordUtil;
 
 /**
  * 链接数据库方法类
  */
 public class DBClient extends SQLiteOpenHelper {
 
-    private static final int ver = 27;  // 版本号，每次更改表结构都需要+1，否则不生效
+    private static final int ver = 28;  // 版本号，每次更改表结构都需要+1，否则不生效
     private static final String dbName = "db_orderfood.db";  // 数据库名称
     private Context context;
 
@@ -46,8 +47,9 @@ public class DBClient extends SQLiteOpenHelper {
             "s_type varchar(20)," +
             "s_img varchar(255))"); // 图片路径
         // 初始商家
+        String pwd = PasswordUtil.hashPassword("123456");
         sqLiteDatabase.execSQL("insert into shops values(?,?,?,?,?,?)",
-                new Object[]{null, "123456", "test", "测试", "测试", foodPath1});
+                new Object[]{null, pwd, "test", "测试", "测试", foodPath1});
 
         /** 存储用户 */
         sqLiteDatabase.execSQL("drop table if exists users"); //如果这表存在则删
@@ -62,7 +64,7 @@ public class DBClient extends SQLiteOpenHelper {
         String userPath = FileImgUtil.getPicAbsPath();
         FileImgUtil.saveDefaultImgToPath(context, R.drawable.upload_img, userPath);
         sqLiteDatabase.execSQL("insert into users values(?,?,?,?,?)",
-                new Object[]{null, "123456", "test", "男", userPath});
+                new Object[]{null, pwd, "test", "男", userPath});
 
         /** 存储用户收货信息 */
         sqLiteDatabase.execSQL("drop table if exists user_infos"); //如果这表存在则删

@@ -26,6 +26,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.orderfood.DAO.ShopDAO;
 import com.example.orderfood.R;
 import com.example.orderfood.util.FileImgUtil;
+import com.example.orderfood.util.PasswordUtil;
 
 import java.util.UUID;
 
@@ -140,6 +141,7 @@ public class RegisterShopActivity extends AppCompatActivity {
                 // 保存到数据库
                 String picPath = FileImgUtil.getPicAbsPath(); // 获取保存图片的绝对路径
                 FileImgUtil.saveImageUriToFile(selectPicUri, RegisterShopActivity.this, picPath); // 保存图片
+                sPwd = PasswordUtil.hashPassword(sPwd);
                 int rtn = ShopDAO.saveShop(sName, sPwd, sDesc, sType, picPath);
                 if (rtn == 0) {
                     Toast.makeText(RegisterShopActivity.this, "注册成功", Toast.LENGTH_SHORT).show();

@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.example.orderfood.Bean.ShopBean;
 import com.example.orderfood.db.DBClient;
+import com.example.orderfood.util.PasswordUtil;
 
 /**
  * 商家相关数据库操作
@@ -31,6 +32,7 @@ public class ShopDAO {
     }
 
     public static int loginAsShop(String name, String pwd) {
+        pwd = PasswordUtil.hashPassword(pwd);
         String[] args = {name, pwd};
         String sql = "select * from shops where s_name = ? and s_pwd = ? limit 1";
 
