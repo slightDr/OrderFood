@@ -45,6 +45,7 @@ public class ManageUserActivity extends AppCompatActivity {
             fragmentTransaction.commit();
         } else {
             fragmentTransaction.replace(R.id.manage_user_frame, new ManageUserMyFragment());
+            naviView.setSelectedItemId(R.id.user_bottom_navi_my);
             fragmentTransaction.commit();
         }
 
