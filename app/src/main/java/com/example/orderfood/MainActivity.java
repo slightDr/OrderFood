@@ -52,12 +52,23 @@ public class MainActivity extends AppCompatActivity {
 
         // 登陆界面单选默认选择商家
         RadioButton shop_radio = findViewById(R.id.login_as_shop);
-        shop_radio.setChecked(true);
+        RadioButton user_radio = findViewById(R.id.login_as_user);
+        String identity = getIntent().getStringExtra("identity");
+        if ("user".equals(identity)) {
+            user_radio.setChecked(true);
+        } else {
+            shop_radio.setChecked(true);
+        }
 
         // 登录功能
         Button login = findViewById(R.id.login_button);
         // 拿到账号、密码、登录选择
         EditText loginNameText = findViewById(R.id.login_name);
+        // 默认账号名
+        String name = getIntent().getStringExtra("account");
+        if (name != null && !name.isEmpty()) {
+            loginNameText.setText(name);
+        }
         EditText loginPwdText = findViewById(R.id.login_password);
         login.setOnClickListener(new View.OnClickListener() {
             @Override

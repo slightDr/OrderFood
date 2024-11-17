@@ -28,6 +28,7 @@ import com.example.orderfood.Bean.ShopBean;
 import com.example.orderfood.Bean.UserBean;
 import com.example.orderfood.DAO.ShopDAO;
 import com.example.orderfood.DAO.UserDAO;
+import com.example.orderfood.MainActivity;
 import com.example.orderfood.R;
 import com.example.orderfood.activity.shop.ManageShopFinishOrderActivity;
 import com.example.orderfood.activity.shop.ManageShopManageCommentActivity;
@@ -73,7 +74,10 @@ public class ManageUserMyFragment extends Fragment {
         exitText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.finish();
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.putExtra("account", user.getU_name());
+                intent.putExtra("identity", "user");
+                startActivity(intent);
             }
         });
 
