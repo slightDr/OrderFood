@@ -118,17 +118,16 @@ public class OrderDAO {
      */
     public static List<OrderBean> getFromOrdersByStr(List<OrderBean> orderBeans, String str) {
         List<OrderBean> ret = new ArrayList<>();
-        // Log.d("mine", "getFromOrdersByStr");
         for (OrderBean orderBean : orderBeans) {
+            // 如果搜索str是oid的一部分，加入返回列表中
             if ((""+orderBean.getO_id()).contains(str)) {
-                // Log.d("mine", "id, "+orderBean.toString());
                 ret.add(orderBean);
                 continue;
             }
+            // 如果搜索str是联系方式的一部分，加入返回列表中
             int i_id = orderBean.getI_id();
             UserInfoBean userInfo = UserInfoDAO.getUserInfoByIid(""+i_id);
             if (userInfo.getITel().contains(str)) {
-                // Log.d("mine", "tel, "+orderBean.toString());
                 ret.add(orderBean);
             }
         }

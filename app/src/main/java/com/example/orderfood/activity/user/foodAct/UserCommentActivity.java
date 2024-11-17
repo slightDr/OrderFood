@@ -1,12 +1,12 @@
-package com.example.orderfood.activity.user.dialog;
+package com.example.orderfood.activity.user.foodAct;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,73 +15,67 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
-import com.example.orderfood.Bean.FoodBean;
-import com.example.orderfood.Bean.UserBean;
-import com.example.orderfood.Bean.UserInfoBean;
 import com.example.orderfood.DAO.CommentDAO;
-import com.example.orderfood.DAO.FoodDAO;
-import com.example.orderfood.DAO.OrderDAO;
-import com.example.orderfood.DAO.UserDAO;
-import com.example.orderfood.DAO.UserInfoDAO;
 import com.example.orderfood.R;
-import com.example.orderfood.activity.user.RegisterUserActivity;
-import com.example.orderfood.activity.user.adapter.UserBuyFoodlListAdapter;
-import com.example.orderfood.activity.user.adapter.UserInfolListAdapter;
-import com.example.orderfood.activity.user.foodAct.ManageUserBuyActivity;
 import com.example.orderfood.util.FileImgUtil;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class UserCommentDialog {
-
-    private Context context;
-    private ManageUserBuyActivity activity;
+public class UserCommentActivity extends AppCompatActivity {
     private ActivityResultLauncher<String> getContentLauncher;
-    private Uri selectPicUri = null;
-    private String u_id;
-    private String s_id;
-
-    public UserCommentDialog() {}
-
-    public UserCommentDialog(Context context, ActivityResultLauncher<String> getContentLauncher) {
-        this.activity = (ManageUserBuyActivity) context;
-        this.context = context;
-        this.getContentLauncher = getContentLauncher;
-    }
+    Uri selectPicUri = null;
 
     /**
      * 打开文件选择器
+     * @param v
      */
-    private void openGallery() {
+    private void openGallery(View v) {
         getContentLauncher.launch("image/*");
     }
 
-    public void init() {
-        View buyDialog = activity.getLayoutInflater().inflate(R.layout.dialog_user_comment, null);
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
-        bottomSheetDialog.setContentView(buyDialog);
-        bottomSheetDialog.show();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_user_comment);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
+        SharedPreferences sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
+        String u_id = sharedPreferences.getString("u_id", "1");
+        String s_id = getIntent().getStringExtra("s_id");
+
+        // 实现返回功能
+        Toolbar toolbar = this.findViewById(R.id.user_comment_toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { // 返回有两种，跳转和关闭
+                onBackPressed(); // 跳转
+                // finish(); // 关闭
+            }
+        });
+
+        UserCommentActivity activity = UserCommentActivity.this;
         // 评论内容
-        EditText contentText = buyDialog.findViewById(R.id.user_comment_content);
+        EditText contentText = this.findViewById(R.id.user_comment_content);
         // 修改评论星级
         String strs[] = {"非常差","差","一般","满意","非常满意"};
         int starIds[] = new int[]{
@@ -91,10 +85,10 @@ public class UserCommentDialog {
                 R.id.user_comment_star_4,
                 R.id.user_comment_star_5,
         };
-        TextView scoreDescView = buyDialog.findViewById(R.id.user_comment_score_desc);
+        TextView scoreDescView = this.findViewById(R.id.user_comment_score_desc);
 
         for (int starId : starIds) {
-            ImageView starView = buyDialog.findViewById(starId);
+            ImageView starView = this.findViewById(starId);
             starView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -109,11 +103,11 @@ public class UserCommentDialog {
                         }
                     }
                     for (int i = 1; i <= score; ++ i) {
-                        ImageView starView = buyDialog.findViewById(starIds[i - 1]);
+                        ImageView starView = activity.findViewById(starIds[i - 1]);
                         starView.setImageResource(R.drawable.yellow_star);
                     }
                     for (int i = score + 1; i <= 5; ++ i) {
-                        ImageView starView = buyDialog.findViewById(starIds[i - 1]);
+                        ImageView starView = activity.findViewById(starIds[i - 1]);
                         starView.setImageResource(R.drawable.white_star);
                     }
                     scoreDescView.setText(str);
@@ -121,18 +115,31 @@ public class UserCommentDialog {
             });
         }
 
-        // 设置上传图片
+        // 默认图像
         Drawable sImgDrawableDefault = ContextCompat.getDrawable(activity, R.drawable.upload_img);
         Bitmap sImgBitmapDefault = ((BitmapDrawable) sImgDrawableDefault).getBitmap();
-        ImageView imgView = buyDialog.findViewById(R.id.user_comment_upload_img);
+        // 初始化文件选择器
+        ImageView imgView = this.findViewById(R.id.user_comment_upload_img);
+        getContentLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(),
+                new ActivityResultCallback<Uri>() {
+                    @Override
+                    public void onActivityResult(Uri uri) {
+                        if (uri != null) {
+                            imgView.setImageURI(uri);
+                            selectPicUri = uri;
+                        }
+                    }
+                }
+        );
+        // 设置上传图片
         imgView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGallery();
+                openGallery(view);
             }
         });
 
-        Button commentButton = buyDialog.findViewById(R.id.user_comment_but);
+        Button commentButton = this.findViewById(R.id.user_comment_but);
         commentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -141,6 +148,7 @@ public class UserCommentDialog {
                 String content = contentText.getText().toString();
                 if (content.isEmpty()) {
                     Toast.makeText(activity, "请输入评论内容", Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 // 获取图片
                 Drawable cImg = imgView.getDrawable();
@@ -151,6 +159,8 @@ public class UserCommentDialog {
                 String picPath = FileImgUtil.getPicAbsPath();
                 Bitmap sImgBitmap = ((BitmapDrawable) cImg).getBitmap(); // 获取图片二进制格式
                 if (sImgBitmap.sameAs(sImgBitmapDefault)) { // 判断是否选择其他图片
+                    Log.d("mine", "select uri "+selectPicUri.toString());
+                    Log.d("mine", "default comment img");
                     picPath = "";
                 }
                 // 获取时间
@@ -177,22 +187,8 @@ public class UserCommentDialog {
                     FileImgUtil.saveImageUriToFile(selectPicUri, activity, picPath); // 保存图片
                 }
                 CommentDAO.insertComment(s_id, u_id, format, content, score, picPath);
-
-                bottomSheetDialog.cancel();
+                finish();
             }
         });
-    }
-
-    public void setUri(Uri uri) {
-        this.selectPicUri = uri;
-    }
-
-    public void setUserCommentDialog(Context context, ActivityResultLauncher<String> getContentLauncher,
-                                     String u_id, String s_id) {
-        this.activity = (ManageUserBuyActivity) context;
-        this.context = context;
-        this.getContentLauncher = getContentLauncher;
-        this.u_id = u_id;
-        this.s_id = s_id;
     }
 }

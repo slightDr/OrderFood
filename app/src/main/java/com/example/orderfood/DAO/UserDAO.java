@@ -17,9 +17,13 @@ public class UserDAO {
     public static int saveUser(String name, String pwd, String sex, String addr, String tel, String img) {
         try {
             conn.execSQL(
-                    "insert into users values(?,?,?,?,?,?,?)",
-                    new Object[]{null, pwd, name, sex, addr, tel, img}
+                    "insert into users values(?,?,?,?,?)",
+                    new Object[]{null, pwd, name, sex, img}
             );
+            Cursor cursor = conn.rawQuery("select last_insert_rowid()", null);
+            cursor.moveToFirst();
+            conn.execSQL("insert into user_infos values(?,?,?,?,?)",
+                    new Object[]{null, cursor.getInt(0), name, addr, tel});
             return 0;
         } catch (Exception e) {
             return 1;
@@ -28,7 +32,7 @@ public class UserDAO {
 
     public static int loginAsUser(String name, String pwd) {
         String[] args = {name, pwd};
-        String sql = "select 1 from users where u_name = ? and u_pwd = ? limit 1";
+        String sql = "select * from users where u_name = ? and u_pwd = ? limit 1";
 
         try (Cursor cursor = conn.rawQuery(sql, args)) {
             if (cursor.moveToFirst()) {

@@ -32,12 +32,13 @@ public class ShopDAO {
 
     public static int loginAsShop(String name, String pwd) {
         String[] args = {name, pwd};
-        String sql = "select 1 from shops where s_name = ? and s_pwd = ? limit 1";
+        String sql = "select * from shops where s_name = ? and s_pwd = ? limit 1";
 
         try (Cursor cursor = conn.rawQuery(sql, args)) {
             if (cursor.moveToFirst()) {
-                Log.d("mine", "login shop id: "+cursor.getInt(0));
-                return cursor.getInt(0); // 登录成功
+                int index = cursor.getColumnIndex("s_id");
+                Log.d("mine", "login shop id: "+cursor.getInt(index));
+                return cursor.getInt(index); // 登录成功
             }
         } catch (Exception e) {
             Log.e("mine", e.toString());

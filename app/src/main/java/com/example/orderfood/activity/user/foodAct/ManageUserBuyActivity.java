@@ -1,15 +1,11 @@
 package com.example.orderfood.activity.user.foodAct;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,9 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -32,21 +25,15 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.orderfood.Bean.ShopBean;
 import com.example.orderfood.R;
-import com.example.orderfood.activity.shop.fragment.ManageShopHomeFragment;
-import com.example.orderfood.activity.shop.fragment.ManageShopMyFragment;
-import com.example.orderfood.activity.user.RegisterUserActivity;
 import com.example.orderfood.activity.user.dialog.UserBuyFoodDialog;
-import com.example.orderfood.activity.user.dialog.UserCommentDialog;
 import com.example.orderfood.activity.user.fragment.ManageUserBuyShopFoodFragment;
 import com.example.orderfood.activity.user.fragment.ManageUserCommentFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.Iterator;
 
 public class ManageUserBuyActivity extends AppCompatActivity {
@@ -54,7 +41,6 @@ public class ManageUserBuyActivity extends AppCompatActivity {
     private Handler handler;
     private Runnable runnable;
     public JSONObject foodJson;  // 购买商品和对应数量
-    private ActivityResultLauncher<String> getContentLauncher;
 
     public ManageUserBuyActivity() {
         super();
@@ -160,26 +146,14 @@ public class ManageUserBuyActivity extends AppCompatActivity {
             }
         });
 
-        // 初始化文件选择器
-        final UserCommentDialog userCommentDialog = new UserCommentDialog();
-        getContentLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(),
-                new ActivityResultCallback<Uri>() {
-                    @Override
-                    public void onActivityResult(Uri uri) {
-                        if (uri != null) {
-                            userCommentDialog.setUri(uri);
-                        }
-                    }
-                }
-        );
-        userCommentDialog.setUserCommentDialog(ManageUserBuyActivity.this, getContentLauncher,
-                u_id, ""+shop.getS_id());
         // 点击评论按钮
         Button commentButton = findViewById(R.id.manage_user_buy_comment_but);
         commentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userCommentDialog.init();
+                Intent intent = new Intent(ManageUserBuyActivity.this, UserCommentActivity.class);
+                intent.putExtra("s_id", ""+shop.getS_id());
+                startActivity(intent);
             }
         });
     }

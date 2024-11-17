@@ -15,7 +15,7 @@ import com.example.orderfood.util.FileImgUtil;
  */
 public class DBClient extends SQLiteOpenHelper {
 
-    private static final int ver = 24;  // 版本号，每次更改表结构都需要+1，否则不生效
+    private static final int ver = 27;  // 版本号，每次更改表结构都需要+1，否则不生效
     private static final String dbName = "db_orderfood.db";  // 数据库名称
     private Context context;
 
@@ -36,7 +36,7 @@ public class DBClient extends SQLiteOpenHelper {
         FileImgUtil.saveDefaultImgToPath(context, R.drawable.upload_img, foodPath2);
 
         /** 存储商家 */
-        sqLiteDatabase.execSQL("drop table if exists shops"); //如果这表存在则删
+        sqLiteDatabase.execSQL("drop table if exists shops"); //如果该表存在则删除
         // 商家ID，密码，名称，
         sqLiteDatabase.execSQL("create table shops(" +
             "s_id integer primary key autoincrement," +
