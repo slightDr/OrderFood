@@ -88,7 +88,7 @@ public class FinishedOrderListAdapter extends ArrayAdapter<OrderBean> {
             totPrice += detailBean.getF_price() * detailBean.getO_num();
         }
         TextView totPriceView = convertView.findViewById(R.id.finished_order_list_totprice);
-        totPriceView.setText("￥ "+totPrice);
+        totPriceView.setText("￥ "+Math.round(totPrice*100.0)/100.0);
 
         return convertView;
     }

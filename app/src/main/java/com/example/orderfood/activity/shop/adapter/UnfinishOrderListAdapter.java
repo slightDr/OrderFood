@@ -92,7 +92,7 @@ public class UnfinishOrderListAdapter extends ArrayAdapter<OrderBean> {
             totPrice += detailBean.getF_price() * detailBean.getO_num();
         }
         TextView totPriceView = convertView.findViewById(R.id.unfinish_order_list_totprice);
-        totPriceView.setText("￥ "+totPrice);
+        totPriceView.setText("￥ "+Math.round(totPrice*100.0)/100.0);
 
         // 取消订单
         Button cancelButton = convertView.findViewById(R.id.unfinish_order_list_cancel_but);
