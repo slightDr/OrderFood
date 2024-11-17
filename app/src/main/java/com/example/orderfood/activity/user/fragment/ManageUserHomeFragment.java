@@ -52,7 +52,7 @@ public class ManageUserHomeFragment extends Fragment {
                 if (foodBeanList.isEmpty()) {
                     listView.setAdapter(null);
                 } else {
-                    listView.setAdapter(new ShopFoodListAdapter(getContext(), foodBeanList));
+                    listView.setAdapter(new UserFoodListAdapter(getContext(), foodBeanList));
                 }
                 return true;
             }
@@ -63,7 +63,7 @@ public class ManageUserHomeFragment extends Fragment {
                 if (foodBeanList.isEmpty()) {
                     listView.setAdapter(null);
                 } else {
-                    listView.setAdapter(new ShopFoodListAdapter(getContext(), foodBeanList));
+                    listView.setAdapter(new UserFoodListAdapter(getContext(), foodBeanList));
                 }
                 return true;
             }
