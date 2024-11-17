@@ -68,35 +68,6 @@ public class UserBuyShopCommentListAdapter extends ArrayAdapter<CommentBean> {
             ImageView starView = convertView.findViewById(starIds[i - 1]);
             starView.setImageResource(R.drawable.white_star);
         }
-        // 修改评论星级
-//        View finalConvertView = convertView;
-//        for (int starId : starIds) {
-//            ImageView starView = finalConvertView.findViewById(starId);
-//            starView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    int clickId = view.getId();
-//                    int score = 1;
-//                    String str = "非常差";
-//                    for (int i = 0; i < 5; ++ i) {
-//                        if (clickId == starIds[i]) {
-//                            score = i + 1;
-//                            str = strs[i];
-//                            break;
-//                        }
-//                    }
-//                    for (int i = 1; i <= score; ++ i) {
-//                        ImageView starView = finalConvertView.findViewById(starIds[i - 1]);
-//                        starView.setImageResource(R.drawable.yellow_star);
-//                    }
-//                    for (int i = score + 1; i <= 5; ++ i) {
-//                        ImageView starView = finalConvertView.findViewById(starIds[i - 1]);
-//                        starView.setImageResource(R.drawable.white_star);
-//                    }
-//                    scoreDescView.setText(str);
-//                }
-//            });
-//        }
 
         TextView contentText = convertView.findViewById(R.id.user_buy_comment_content);
         contentText.setText(commentBean.getCommentContent());
@@ -104,6 +75,7 @@ public class UserBuyShopCommentListAdapter extends ArrayAdapter<CommentBean> {
         if (commentBean.getCommentImg().isEmpty()) {
             commentImageView.setVisibility(View.GONE);
         } else {
+            commentImageView.setVisibility(View.VISIBLE);
             commentImageView.setImageBitmap(BitmapFactory.decodeFile(commentBean.getCommentImg()));
         }
 
